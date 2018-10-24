@@ -1,0 +1,59 @@
+/* CSS for Neotoma Landing Pages */
+
+.mainpage {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.componentbox {
+  /* Each component gets moved over a bit. */
+  margin-left: 1%;
+  margin-right: 1%;
+  padding: 2%;
+  border-style: solid;
+  border-width: thin;
+  border-color: #a0a0a0ff;
+}
+
+.componentbox:hover {
+  background: #f0f0f0ff;
+}
+
+.sitebox {
+  border-style: solid;
+  border-width: thin;
+  border-color: #a0a0a0ff;
+  overflow: hidden;
+  background: #f7f7f7ff;
+  display: flex;
+  flex-direction: row;
+}
+
+.sitebox .textbox {
+  float: left;
+  width: 80%;
+  margin-right: 10px;
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-right: 5px;
+}
+
+.sitebox .mapbox {
+  /* Contains map and coordinates */
+  border-style: solid;
+  border-width: thin;
+  border-color: #a0a0a0ff;
+  min-width: 200px;
+  min-height: 200px;
+  width: auto;
+  margin: 2%;
+  padding: .5%;
+  float: right;
+  box-shadow: 2px 5px 5px #888888;
+}
+
+.map {
+  /* contains the map */
+  width: 200px;
+  height:200px;
+}

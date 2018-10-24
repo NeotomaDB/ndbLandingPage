@@ -1,0 +1,13 @@
+/* Todo:
+- import fonts
+- import map elements
+- import titlecard elements
+- import header and footer CSS
+*/
+
+.mapbox {
+  width: 200px;
+  height: 200px;
+  overflow:hidden;
+  float: right;
+}

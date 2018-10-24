@@ -1,4 +1,6 @@
-# landingpages
+# Neotoma Paleoecology Database Landing Pages
+
+This project is used to develop a Javascript `Vue.js` application to serve Neotoma Paleoecology Database datasets as landing pages.
 
 ## Project setup
 ```

@@ -2,12 +2,11 @@
   <div class="mainpage">
     <app-header></app-header>
     <div>
-      <app-titlebar dsid='22827'></app-titlebar>
-      <app-ageinfo></app-ageinfo>
-      <app-contacts></app-contacts>
-      <app-publications></app-publications>
-      <app-contacts></app-contacts>
-      <app-commondata></app-commondata>
+      <app-titlebar :dsid=dsid></app-titlebar>
+      <app-contacts :dsid=dsid></app-contacts>
+      <app-ageinfo :dsid=dsid></app-ageinfo>
+      <app-publications :dsid=dsid></app-publications>
+      <app-commondata :dsid=dsid></app-commondata>
       <div class="componentbox">
         <h2>Database Snapshots</h2>
         The most recent <a href="http://www.neotomadb.org/snapshots">Neotoma PostgreSQL Database Snapshot</a> is available online.
@@ -33,6 +32,7 @@
 
   export default {
     name: 'app',
+    props: ['dsid'],
     components: {
       'app-footer': Footer,
       'app-header': Header,
@@ -41,6 +41,11 @@
       'app-ageinfo': ageinfo,
       'app-contacts': contacts,
       'app-commondata': commondata
+    },
+    data() {
+      return {
+        msg: "Rendered!",
+      };
     }
   }
 </script>

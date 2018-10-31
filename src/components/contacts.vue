@@ -1,16 +1,42 @@
 <template>
   <div class="componentbox">
     <h2>Associated Contacts</h2>
+    <div v-for="i in items" class="namecard">
+      <strong>{{i.fullName}}</strong>
+      <div v-if="i.address !== null"><small>{{i.address}}</small></div>
+      <div v-if="i.url !== null"><br><a :href=i.url>Research Website</a></div>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
     name: 'contacts',
+    props: {
+      dsid: {
+        required: true
+      }
+    },
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Contact data rendered.',
+        items: null
       }
+    },
+    methods: {
+      fetchData: function () {
+        let self = this
+
+        fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/contacts')
+          .then((response) => { return response.json() })
+          .then((data) => {
+            /* Modifying the values and processing the inputs */
+            self.items = data.data[0].contact
+        });
+      }
+    },
+    mounted() {
+      this.fetchData();
     }
   }
 </script>

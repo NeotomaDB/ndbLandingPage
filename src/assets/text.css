@@ -1,4 +1,7 @@
-p { font-family: "Raleway";
+
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Raleway|Roboto+Slab');
+
+* { font-family: "Raleway";
     color: rgba(0,0,0,0.8); }
 
 a { font-weight: 700;

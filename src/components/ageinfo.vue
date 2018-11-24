@@ -1,6 +1,6 @@
 <template>
   <div class="componentbox">
-    <h2>Chronological</h2>
+    <h2>Chronology</h2>
     <div v-if="this.items == null">
       There is no chronological information associated with this record.
     </div>
@@ -8,10 +8,9 @@
       <div v-for="i in this.items" class="namecard">
         <h3>Chronology: {{i.chronologyname}}</h3>
 
-          <strong>Age Type</strong>: {{i.agetype}}
-          <strong>Prepared by</strong>: {{i.preparedby.firstname + " " + i.preparedby.familyname}}
-          <strong>Age Range</strong>: {{i.chronologyagepan.younger}} to {{i.chronologyagepan.older}}
-        </div>
+        <strong>Age Type</strong>: {{i.agetype}}
+        <strong>Prepared by</strong>: {{i.preparedby.firstname + " " + i.preparedby.familyname}}
+        <strong>Age Range</strong>: {{i.chronologyagepan.younger}} to {{i.chronologyagepan.older}}
       </div>
     </div>
   </div>

@@ -41,15 +41,10 @@ li, tr {
   color: rgba(0,0,0,0.8);
 }
 
-p.hanging-indent {
-  margin-left: 1cm;
-  text-indent: -0.5cm;
-  font-family: "EB Garamond";
-  font-size: 11pt }
-
-p.hangingindent:hover{
-  background:#dddddd
-}
+.pubtag {
+  vertical-align: middle;
+  padding-left: 5px;
+  font-size: 13pt }
 
 a:link { so-language: zxx }
 

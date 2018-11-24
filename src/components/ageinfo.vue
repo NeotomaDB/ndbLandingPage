@@ -1,6 +1,6 @@
 <template>
   <div class="componentbox">
-    <h2>Age Information</h2>
+    <h2>Chronological</h2>
     <div v-if="this.items == null">
       There is no chronological information associated with this record.
     </div>

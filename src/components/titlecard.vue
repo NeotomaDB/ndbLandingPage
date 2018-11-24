@@ -5,13 +5,13 @@
         <h1>Neotoma Dataset {{ this.dsid }}</h1>
         <h2>{{items.site.sitename}}</h2>
         <h3>{{items.datasettype}} Dataset</h3>
-        <strong>{{items.dataset[0].databasename}}</strong>
+        <strong><small>{{items.dataset[0].database}}</small></strong>
         <p><strong>Site Description: </strong><em>{{items.site.sitedescription}}</em></p>
         <p><strong>Site Notes: </strong><em>{{items.site.sitenotes}}</em></p>
       </div>
       <div class='mapbox'>
         <div class='map'>
-          <l-map :zoom = 6 :center = items.coordinates >
+          <l-map :zoom = 5 :center = items.coordinates >
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
             <l-marker :lat-lng= items.coordinates ></l-marker>
           </l-map>
@@ -20,10 +20,24 @@
       </div>
     </div>
     <div id="container">
-      <div>DOI: {{items.DOI}}</div>
-      <div><a target="_blank" :href=items.explorer>Neotoma Explorer Link</a></div>
-      <div>Download JSON</div>
-      <div>Download zipped CSV</div>
+       <a target="_blank" :href="items.doi[0]">
+         <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
+      </a>
+      <a target="_blank" :href=items.explorer>
+        <div class="buttondiv">
+          Neotoma Explorer Link
+        </div>
+      </a>
+      <a target="_blank" :href=items.explorer>
+        <div class="buttondiv">
+          Download JSON
+        </div>
+      </a>
+        <a target="_blank" :href=items.explorer>
+          <div class="buttondiv">
+            Download zipped CSV
+          </div>
+        </a>
     </div>
   </div>
 </template>
@@ -31,6 +45,7 @@
 
 <script>
   import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
+
   export default {
     name: 'titleCard',
     props: {
@@ -47,8 +62,8 @@
     data () {
       return {
         items: null,
-        url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors', }
+        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)', }
     },
     methods: {
       fetchData: function () {
@@ -63,6 +78,11 @@
             self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid
             self.items.loc = JSON.parse(self.items.site.geography)
             self.items.coordinates = self.items.loc.coordinates.reverse()
+            if (self.items.dataset[0].doi == null) {
+              self.items.doi = ['', 'No DOI minted']
+            } else {
+              self.items.doi = ['https://dx.doi.org/'+ self.items.dataset[0].doi, self.items.dataset[0].doi ]
+            }
             if (self.items.site.sitedescription === null) {
               self.items.site.sitedescription = "No description exists for this site."
             }

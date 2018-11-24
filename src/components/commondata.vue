@@ -4,9 +4,9 @@
 
     <h3>Datasets at the Same Site</h3>
 
-    <div v-if="this.dataset.length > 0">
+    <div v-if="this.dataset.length > 0" class="cardbox">
       <div v-for="i in this.dataset"  class="namecard">
-        <small>[{{ i.datasetid }}]</small> {{ i.datasettype.charAt(0).toUpperCase() + i.datasettype.slice(1) }}
+        <small>[<strong><a target="_blank" :href= "i.datasetid">{{ i.datasetid }}</a></strong>]</small> {{ i.datasettype.charAt(0).toUpperCase() + i.datasettype.slice(1) }}
       </div>
     </div>
     <div v-else>
@@ -49,6 +49,7 @@ export default {
               self.dataset = outsets
             })
       })
+
       fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/publications')
         .then((response) => { return response.json() })
         .then((data) => {

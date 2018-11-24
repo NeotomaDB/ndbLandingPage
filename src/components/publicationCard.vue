@@ -2,9 +2,10 @@
   <div class="componentbox">
     <h2>Publications</h2>
     The following publications are associated with this record:
-
-    <div v-for="i in this.pubs" class="namecard">
-      {{i.citation}}
+    <div class="cardbox">
+      <div v-for="i in this.pubs" class="namecard">
+        <p class="hanging-indent">{{i.citation}}</p>
+      </div>
     </div>
   </div>
 </template>

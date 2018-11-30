@@ -113,6 +113,11 @@
     background: rgba(72,202,59, 0.2)
 }
 
+.buttondiv:active {
+    background: rgba(72,202,59, 0.4);
+    box-shadow: none;
+}
+
 .headerbox {
   background:#f0f0f0ff;
   padding: 5px;

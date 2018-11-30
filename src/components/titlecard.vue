@@ -28,14 +28,14 @@
           Neotoma Explorer Link
         </div>
       </a>
-      <a target="_blank" :href=items.explorer>
+      <a target="_blank" :href=items.currjson>
         <div class="buttondiv">
-          Download JSON
+          Download Current Data (JSON)
         </div>
       </a>
-        <a target="_blank" :href=items.explorer>
+        <a target="_blank" :href=items.frozenjson>
           <div class="buttondiv">
-            Download zipped CSV
+            Download Data As Uploaded (JSON)
           </div>
         </a>
     </div>
@@ -75,9 +75,11 @@
             /* Modifying the values and processing the inputs */
             self.items = data.data[0]
             self.items.datasettype = self.items.dataset[0].datasettype.charAt(0).toUpperCase() + self.items.dataset[0].datasettype.slice(1);
-            self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid
-            self.items.loc = JSON.parse(self.items.site.geography)
-            self.items.coordinates = self.items.loc.coordinates.reverse()
+            self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid;
+            self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
+            self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
+            self.items.loc = JSON.parse(self.items.site.geography);
+            self.items.coordinates = self.items.loc.coordinates.reverse();
             if (self.items.dataset[0].doi == null) {
               self.items.doi = ['', 'No DOI minted']
             } else {

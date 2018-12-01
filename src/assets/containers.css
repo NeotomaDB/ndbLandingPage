@@ -63,10 +63,10 @@
 
 .namecard {
   flex: 1;
-  max-width: 48%;
-  min-width: 48%;
+  max-width: 46%;
+  min-width: 46%;
   padding: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 30px;

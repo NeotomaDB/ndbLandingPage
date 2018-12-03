@@ -124,7 +124,29 @@
   border-style: solid;
   border-width: thin;
   border-color: #a0a0a0ff;
-  margin-bottom: 1%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.headermouse {
+  flex: 1;
+  vertical-align: middle;
+}
+
+.headername {
+  flex: 1;
+  text-align: right;
+  vertical-align: middle;
+  padding-right: 10px;
+  padding-top:10px;
+}
+
+.headername > h1 {
+  text-align: right;
 }
 
 .doi {

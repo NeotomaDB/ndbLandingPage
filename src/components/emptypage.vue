@@ -2,8 +2,8 @@
   <div>
     <div class="componentbox">
       <h1>Neotoma Paleoecology Landing Pages</h1>
-      <img src="@/assets/maps/centralamerica.png" style="width:100%">
       <p>This page is intended to operate and a resource for obtaining extended metadata about Neotoma resources and to serve as a platform for DOI landing pages.  To access information about an individual Neotoma Dataset include the dataset ID in the URL: <strong>http://data-dev.neotomadb.org/{DatasetID}</strong>, for example, the dataset for the Lake Tulane Loss on Ignition dataset can be found at <a href="http://data-dev.neotomadb.org/2662">http://data-dev.neotomadb.org/2662</a>.</p>
+      <img :src="path()" style="width:100%">
       <p>To explore Neotoma datasets interactively please use the <a href="http://apps.neotomadb.org/Explorer">Neotoma Explorer</a>.</p>
       <p>This application is managed and maintained as an open-source project on the <a href="https://github.com/NeotomaDB/ndbLandingPage">Neotoma GitHub Repository</a>.</p>
     </div>
@@ -17,8 +17,21 @@
     name: 'emptyPage',
     data () {
       return {
-        items: null
+        images: ["centralamerica.png",
+                 "australia.png",
+                 "easternna.png",
+                 "japan.png",
+                 "pacific_coast.png",
+                 "southamerica.png",
+                 "westernasia.png"],
+        selectedimage: ''
       }
+    },
+    methods: {
+      path() {
+        var random = Math.floor(Math.random() * this.images.length);
+        return require('../assets/maps/' + this.images[random]);
     }
   }
+}
 </script>

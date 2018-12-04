@@ -2,7 +2,7 @@
   <div class="mainpage">
     <app-header></app-header>
     <app-titlebar :dsid=dsid v-if="dsid !== undefined"></app-titlebar>
-    {{ dsid }}
+    <app-emptypage v-if="dsid === undefined"></app-emptypage>
     <app-contacts :dsid=dsid v-if="dsid !== undefined"></app-contacts>
     <app-ageinfo :dsid=dsid v-if="dsid !== undefined"></app-ageinfo>
     <app-publications :dsid=dsid v-if="dsid !== undefined"></app-publications>
@@ -26,6 +26,7 @@
   import publicationCard from './components/publicationCard.vue'
   import contacts from './components/contacts.vue'
   import commondata from './components/commondata.vue'
+  import emptyPage from './components/emptypage.vue'
   import './assets/text.css';
   import './assets/containers.css'
 
@@ -39,7 +40,8 @@
       'app-publications': publicationCard,
       'app-ageinfo': ageinfo,
       'app-contacts': contacts,
-      'app-commondata': commondata
+      'app-commondata': commondata,
+      'app-emptypage': emptyPage
     },
     data() {
       return {

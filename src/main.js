@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 import App from './App.vue'
+import "leaflet/dist/leaflet.css";
 
 // eslint-disable-next-line
 delete L.Icon.Default.prototype._getIconUrl

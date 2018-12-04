@@ -62,8 +62,8 @@
     data () {
       return {
         items: null,
-        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-        attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)', }
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012', }
     },
     methods: {
       fetchData: function () {
@@ -112,8 +112,7 @@
   .container-leaflet {
     position: absolute;
     top: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 300px;
+    height: 200px;
   }
 </style>

@@ -73,6 +73,10 @@
           .then((response) => { return response.json() })
           .then((data) => {
             /* Modifying the values and processing the inputs */
+            if(data.data.length == 0){
+              this.$router.push('/');
+            }
+
             self.items = data.data[0]
             self.items.datasettype = self.items.dataset[0].datasettype.charAt(0).toUpperCase() + self.items.dataset[0].datasettype.slice(1);
             self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid;

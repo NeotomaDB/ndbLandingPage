@@ -16,7 +16,7 @@
             <l-marker :lat-lng= items.coordinates ></l-marker>
           </l-map>
         </div>
-        <small><strong>Coordinates</strong>: {{items.loc.coordinates}}</small>
+        <small><strong>Coordinates</strong>: {{items.coordinates}}</small>
       </div>
     </div>
     <div id="container">
@@ -84,6 +84,7 @@
             self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
             self.items.loc = JSON.parse(self.items.site.geography);
             self.items.coordinates = self.items.loc.coordinates.reverse();
+
             if (self.items.dataset[0].doi == null) {
               self.items.doi = ['', 'No DOI minted']
             } else {
@@ -97,6 +98,14 @@
             }
             if (self.items.dataset[0].doi === null) {
               self.items.DOI = "No DOI has been minted for this site."
+            }
+
+            if (self.items.coordinates[0].length > 1) {
+              var coordlen = self.items.coordinates[0].length;
+              self.items.coordinates = self.items.coordinates[0]
+                .reduce((acc, cur) => [(acc[0] + cur[0]), (acc[1] + cur[1])])
+                .map(x => x / coordlen)
+                .reverse()
             }
         });
       }

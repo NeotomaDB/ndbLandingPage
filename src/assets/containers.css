@@ -159,3 +159,15 @@
   height: 1em;
   padding-right:6px;
 }
+
+.geochronwarn {
+  border-color: #aa000077;
+  border-width: thin;
+  border-style: solid;
+  padding: 3px;
+  font-size: 0.8rem;
+  background-color: #aa000033;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-left: -3px;
+}

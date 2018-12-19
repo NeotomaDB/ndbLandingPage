@@ -5,6 +5,9 @@
         <h1>Neotoma Dataset {{ this.dsid }}</h1>
         <h2>{{items.site.sitename}}</h2>
         <h3>{{items.datasettype}} Dataset</h3>
+        <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
+          <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have limited associated metadata.  Please see the associated datasets below for more complete metadata.
+        </div>
         <strong><small>{{items.dataset[0].database}}</small></strong>
         <p><strong>Site Description: </strong><em>{{items.site.sitedescription}}</em></p>
         <p><strong>Site Notes: </strong><em>{{items.site.sitenotes}}</em></p>

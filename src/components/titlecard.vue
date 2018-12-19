@@ -23,24 +23,44 @@
       </div>
     </div>
     <div id="container">
-       <a target="_blank" :href="items.doi[0]">
-         <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
-      </a>
+      <div v-if="items.doi[1]==='No DOI minted'">
+        <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
+      </div>
+      <div v-else>
+        <a target="_blank" :href="items.doi[0]">
+           <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
+        </a>
+      </div>
       <a target="_blank" :href=items.explorer>
         <div class="buttondiv">
           Neotoma Explorer Link
         </div>
       </a>
-      <a target="_blank" :href=items.currjson>
-        <div class="buttondiv">
-          Download Current Data (JSON)
-        </div>
-      </a>
+      <div v-if="items.datasettype == 'Geochronologic'">
+          <div class="buttondiv">
+            Current Data Disabled
+          </div>
+      </div>
+      <div v-else>
+        <a target="_blank" :href=items.currjson>
+          <div class="buttondiv">
+            Download Current Data (JSON)
+          </div>
+        </a>
+      </div>
+      <div v-if="items.datasettype == 'Geochronologic'">
+          <div class="buttondiv">
+            Data As Uploaded Disabled
+          </div>
+      </div>
+      <div v-else>
         <a target="_blank" :href=items.frozenjson>
           <div class="buttondiv">
             Download Data As Uploaded (JSON)
           </div>
         </a>
+      </div>
+
     </div>
   </div>
 </template>
@@ -87,6 +107,11 @@
             self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
             self.items.loc = JSON.parse(self.items.site.geography);
             self.items.coordinates = self.items.loc.coordinates.reverse();
+
+            if (self.items.datasettype === 'Geochronologic') {
+              self.items.currjson = ''
+              self.items.frozenjson = ''
+            }
 
             if (self.items.dataset[0].doi == null) {
               self.items.doi = ['', 'No DOI minted']

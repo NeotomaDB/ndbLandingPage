@@ -46,14 +46,16 @@ export default {
             .then((response) => { return response.json() })
             .then((data) => {
               var outsets =  data.data[0].dataset.filter( x=> !(x.datasetid === parseInt(this.dsid) ))
-              self.dataset = outsets
+              self.dataset = outsets.filter((v, i, a) => a.map(x => x.datasetid).indexOf(v.datasetid) === i);
             })
       })
 
+
+/*
       fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/publications')
         .then((response) => { return response.json() })
         .then((data) => {
-          /* Modifying the values and processing the inputs */
+          /* Modifying the values and processing the inputs
           var siteid = data.data[0].siteid
           self.site = siteid
 
@@ -64,6 +66,8 @@ export default {
               self.dataset = outsets
             })
       })
+*/
+      // Set up the datasets sowe only have unique IDs.
 
     }
   },

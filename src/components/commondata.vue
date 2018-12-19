@@ -28,6 +28,7 @@ export default {
     return {
       msg: 'Common data rendered.',
       dataset: null,
+      pbndataset: null,
       site: null
     }
   },
@@ -50,24 +51,24 @@ export default {
             })
       })
 
-
-/*
-      fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/publications')
+      /*fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/publications')
         .then((response) => { return response.json() })
         .then((data) => {
           /* Modifying the values and processing the inputs
-          var siteid = data.data[0].siteid
-          self.site = siteid
+          var pid = data.data.map(x => x.publicationid)
 
-          fetch('http://api-dev.neotomadb.org/v2.0/data/sites/' + siteid + '/datasets')
+          pid.map(x =>
+            fetch('http://api-dev.neotomadb.org/v2.0/data/sites/' + x + '/datasets')
             .then((response) => { return response.json() })
             .then((data) => {
               var outsets =  data.data[0].dataset.filter( x=> !(x.datasetid === parseInt(this.dsid) ))
-              self.dataset = outsets
+              if (outsets === null) {
+                self.pbndataset = '';
+              } else {
+                self.pbndataset = outsets.filter((v, i, a) => a.map(x => x.datasetid).indexOf(v.datasetid) === i);
+              }
             })
-      })
-*/
-      // Set up the datasets sowe only have unique IDs.
+      }) */
 
     }
   },

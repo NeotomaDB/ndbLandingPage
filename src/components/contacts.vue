@@ -36,6 +36,7 @@
             /* Modifying the values and processing the inputs */
             self.items = data.data[0].contact
         });
+
       }
     },
     mounted() {

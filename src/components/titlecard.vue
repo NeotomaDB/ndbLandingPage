@@ -62,6 +62,18 @@
       </div>
 
     </div>
+
+    <div v-if="items.doi.length > 0">
+      <script type="application/ld+json">
+        {{ datasetDOI }}
+      </script>
+    </div>
+    <div v-else>
+      <script type="application/ld+json">
+        {{ buildSchema }}
+      </script>
+    </div>
+
   </div>
 </template>
 
@@ -84,62 +96,126 @@
     },
     data () {
       return {
+        this: {pubs: null, dataset: null},
         items: null,
         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012', }
     },
-    methods: {
-      fetchData: function () {
-        let self = this
+    created() {
+      let self = this
 
-        fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid)
-          .then((response) => { return response.json() })
-          .then((data) => {
-            /* Modifying the values and processing the inputs */
-            if(data.data.length == 0){
-              this.$router.push('/');
-            }
+      fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid)
+        .then((response) => { return response.json() })
+        .then((data) => {
+          /* Modifying the values and processing the inputs */
+          if(data.data.length == 0){
+            this.$router.push('/');
+          }
 
-            self.items = data.data[0]
-            self.items.datasettype = self.items.dataset[0].datasettype.charAt(0).toUpperCase() + self.items.dataset[0].datasettype.slice(1);
-            self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid;
-            self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
-            self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
-            self.items.loc = JSON.parse(self.items.site.geography);
-            self.items.coordinates = self.items.loc.coordinates.reverse();
+          self.items = data.data[0]
+          self.items.datasettype = self.items.dataset[0].datasettype.charAt(0).toUpperCase() + self.items.dataset[0].datasettype.slice(1);
+          self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid;
+          self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
+          self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
+          self.items.loc = JSON.parse(self.items.site.geography);
+          self.items.coordinates = self.items.loc.coordinates.reverse();
 
-            if (self.items.datasettype === 'Geochronologic') {
-              self.items.currjson = ''
-              self.items.frozenjson = ''
-            }
+          if (self.items.datasettype === 'Geochronologic') {
+            self.items.currjson = ''
+            self.items.frozenjson = ''
+          }
 
-            if (self.items.dataset[0].doi == null) {
-              self.items.doi = ['', 'No DOI minted']
-            } else {
-              self.items.doi = ['https://dx.doi.org/'+ self.items.dataset[0].doi, self.items.dataset[0].doi ]
-            }
-            if (self.items.site.sitedescription === null) {
-              self.items.site.sitedescription = "No description exists for this site."
-            }
-            if (self.items.site.sitenotes === null) {
-              self.items.site.sitenotes = "No site notes exists for this site."
-            }
-            if (self.items.dataset[0].doi === null) {
-              self.items.DOI = "No DOI has been minted for this site."
-            }
+          if (self.items.dataset[0].doi == null) {
+            self.items.doi = ['', 'No DOI minted']
+          } else {
+            self.items.doi = ['https://dx.doi.org/'+ self.items.dataset[0].doi, self.items.dataset[0].doi ]
+          }
+          if (self.items.site.sitedescription === null) {
+            self.items.site.sitedescription = "No description exists for this site."
+          }
+          if (self.items.site.sitenotes === null) {
+            self.items.site.sitenotes = "No site notes exists for this site."
+          }
+          if (self.items.dataset[0].doi === null) {
+            self.items.DOI = "No DOI has been minted for this site."
+          }
 
-            if (self.items.coordinates[0].length > 1) {
-              var coordlen = self.items.coordinates[0].length;
-              self.items.coordinates = self.items.coordinates[0]
-                .reduce((acc, cur) => [(acc[0] + cur[0]), (acc[1] + cur[1])])
-                .map(x => x / coordlen)
-                .reverse()
-            }
-        });
-      }
+          if (self.items.coordinates[0].length > 1) {
+            var coordlen = self.items.coordinates[0].length;
+            self.items.coordinates = self.items.coordinates[0]
+              .reduce((acc, cur) => [(acc[0] + cur[0]), (acc[1] + cur[1])])
+              .map(x => x / coordlen)
+              .reverse()
+          }
+      });
     },
-    mounted() {
-      this.fetchData();
+    mounted: {
+      datasetDOI: function() {
+        var output = {}
+
+        fetch(this.items.doi[0], {headers: {'Accept': 'application/vnd.schemaorg.ld+json'}})
+        .then(response => response.json())
+        .then((data) => { return data })
+
+        return output;
+      },
+      buildSchema: function() {
+        var output = {
+          "@context": "http://schema.org",
+          "@type": "Dataset",
+          "license": "https://creativecommons.org/licenses/by/4.0/deed.en_US",
+          "includedInDataCatalog": {
+            "@type": "DataCatalog",
+            "about": "Paleoecology",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Neotoma Paleoecological Database",
+              "alternateName":"Neotoma",
+              "description":"The Neotoma Paleoecology Database and Community is an online hub for data, research, education, and discussion about paleoenvironments.",
+              "url": "http://neotomadb.org"
+            },
+            "funder": {
+              "@type":"Organization",
+              "name":"National Sciences Foundation",
+              "alternateName": "NSF",
+              "url": "http://nsf.gov"
+            }
+          },
+          "about": "",
+          "distribution":{
+            "@type":"DataDownload",
+            "contentUrl": this.items.currjson,
+            "datePublished": "2018-02-02 14:24:27",
+            "inLanguage": "en"
+          },
+          "spatialCoverage": {
+            "@type": "Place",
+            "name": this.items.site.sitename + " " + this.items.datasettype + " dataset",
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": this.items.coordinates[0],
+                "longitude": this.items.coordinates[1],
+                "elevation": this.items.site.altitude
+            }
+          }
+        }
+
+        if (!this.items.dataset[0].doi == null) {
+          output["@context"] = {
+            "@vocab": "http://schema.org/",
+            "datacite": "http://purl.org/spar/datacite/",
+          }
+
+          output.identifier = {
+              "@type": "PropertyValue",
+              "propertyID": "http://purl.org/spar/datacite/doi",
+              "url": this.items.doi[0],
+              "value": this.items.doi[1]
+          }
+        }
+
+        return output;
+      }
     }
   }
 </script>

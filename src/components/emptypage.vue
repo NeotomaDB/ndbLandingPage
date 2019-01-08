@@ -17,13 +17,13 @@
     name: 'emptyPage',
     data () {
       return {
-        images: ["centralamerica.png",
-                 "australia.png",
-                 "easternna.png",
-                 "japan.png",
-                 "pacific_coast.png",
-                 "southamerica.png",
-                 "westernasia.png"],
+        images: ["centralamerica-fs8.png",
+                 "australia-fs8.png",
+                 "easternna-fs8.png",
+                 "japan-fs8.png",
+                 "pacific_coast-fs8.png",
+                 "southamerica-fs8.png",
+                 "westernasia-fs8.png"],
         selectedimage: ''
       }
     },

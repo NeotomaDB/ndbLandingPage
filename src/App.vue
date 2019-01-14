@@ -1,6 +1,7 @@
 <template>
   <div class="mainpage">
     <app-header></app-header>
+    <app-status></app-status>
     <app-titlebar :dsid=dsid v-if="dsid !== undefined"></app-titlebar>
     <app-emptypage v-if="dsid === undefined"></app-emptypage>
     <app-contacts :dsid=dsid v-if="dsid !== undefined"></app-contacts>
@@ -27,6 +28,7 @@
   import contacts from './components/contacts.vue'
   import commondata from './components/commondata.vue'
   import emptyPage from './components/emptypage.vue'
+  import datastatus from './components/landingstatus.vue'
   import './assets/text.css';
   import './assets/containers.css'
 
@@ -41,11 +43,12 @@
       'app-ageinfo': ageinfo,
       'app-contacts': contacts,
       'app-commondata': commondata,
-      'app-emptypage': emptyPage
+      'app-emptypage': emptyPage,
+      'app-status': datastatus
     },
     data() {
       return {
-        msg: "Rendered!",
+        msg: "Rendered!"
       };
     }
   }

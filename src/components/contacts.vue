@@ -1,6 +1,6 @@
 <template>
   <div class="componentbox">
-    <h2>Principle Investigator</h2>
+    <h2>Principal Investigator</h2>
     <div class="cardbox">
       <div v-for="i in items" class="namecard">
         <strong>{{i.fullName}}</strong>
@@ -11,7 +11,7 @@
     </div>
   </div>
 </template>
-
+tatus
 <script>
   export default {
     name: 'contacts',

@@ -116,7 +116,7 @@
           self.items.datasettype = self.items.dataset[0].datasettype.charAt(0).toUpperCase() + self.items.dataset[0].datasettype.slice(1);
           self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid;
           self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
-          self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
+          self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/frozen/" + self.items.dataset[0].datasetid;
           self.items.loc = JSON.parse(self.items.site.geography);
           self.items.coordinates = self.items.loc.coordinates.reverse();
 

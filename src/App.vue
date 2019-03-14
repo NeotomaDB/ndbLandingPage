@@ -1,19 +1,19 @@
 <template>
   <div class="mainpage">
     <app-header></app-header>
-    <app-status></app-status>
     <app-titlebar :dsid=dsid v-if="dsid !== undefined"></app-titlebar>
     <app-emptypage v-if="dsid === undefined"></app-emptypage>
     <app-contacts :dsid=dsid v-if="dsid !== undefined"></app-contacts>
     <app-ageinfo :dsid=dsid v-if="dsid !== undefined"></app-ageinfo>
     <app-publications :dsid=dsid v-if="dsid !== undefined"></app-publications>
     <app-commondata :dsid=dsid v-if="dsid !== undefined"></app-commondata>
-    <div class="componentbox">
+    <app-status></app-status>
+    <div class="pagebox">
       <h2>Database Snapshots</h2>
-      The most recent <a href="http://www.neotomadb.org/snapshots">Neotoma PostgreSQL Database Snapshot</a> is available online.
+      <p>The most recent <a href="http://www.neotomadb.org/snapshots">Neotoma PostgreSQL Database Snapshot</a> is available online.</p>
 
       <h2>Data Use Policy</h2>
-      We ask all data users to consider the <a href="http://www.neotomadb.org/data/category/use">Neotoma Data Use policy</a> as well as the general guidelines of open and ethical data sharing when using this data.
+      <p>We ask all data users to consider the <a href="http://www.neotomadb.org/data/category/use">Neotoma Data Use policy</a> as well as the general guidelines of open and ethical data sharing when using this data.</p>
     </div>
     <app-footer></app-footer>
   </div>
@@ -31,6 +31,8 @@
   import datastatus from './components/landingstatus.vue'
   import './assets/text.css';
   import './assets/containers.css'
+  import 'bootstrap/dist/css/bootstrap.css'
+  import 'bootstrap-vue/dist/bootstrap-vue.css'
 
   export default {
     name: 'app',

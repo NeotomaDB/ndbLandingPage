@@ -1,35 +1,24 @@
 <template>
-  <div class="headerbox">
-    <div>
-      <strong>Neotoma Web Resource Status</strong>
-    </div>
-      <div class="statuscard">
-        <div class="statusname">Neotoma api</div>
-        <div v-if="this.ping['api'] === true" class="light">
-          <img src='@/assets/gobutton.svg' />
-        </div>
-        <div v-else class="light">
-          <img src='@/assets/stopbutton.svg' />
-        </div>
-      </div>
-      <div class="statuscard">
-        <div style="float:left;">Neotoma api-dev</div>
-        <div v-if="this.ping['api-dev'] === true" class="light">
-          <img src='@/assets/gobutton.svg' />
-        </div>
-        <div v-else class="light">
-          <img src='@/assets/stopbutton.svg' />
-        </div>
-      </div>
-      <div  class="statuscard">
-        <div style="float:left;">Neotoma Explorer</div>
-        <div v-if="this.ping['explorer'] === true" class="light">
-          <img src='@/assets/gobutton.svg' />
-        </div>
-        <div v-else class="light">
-          <img src='@/assets/stopbutton.svg' />
-        </div>
-    </div>
+  <div class="pagebox">
+    <b-container fluid>
+      <b-row>
+        <b-col cols="5">
+          <b-card bg-variant="light" border-variant="secondary">
+            <h5>Neotoma Web Resource Status</h5>
+          </b-card>
+        </b-col>
+        <b-col cols="7" align-self="center">
+          <a href="http://api.neotomadb.org">Neotoma API</a> [<span v-if="this.ping['api'] === true" class="online">Online</span>
+                       <span v-else class="offline">Offline</span>];
+          <a href="http://api-dev.neotomadb.org">Dev. API</a> [<span v-if="this.ping['api-dev'] === true" class="online">Online</span>
+                    <span v-else class="offline">Offline</span>];
+          <a href="http://apps.neotomadb.org/explorer">Explorer</a> [<span v-if="this.ping['explorer'] === true" class="online">Online</span>
+                    <span v-else class="offline">Offline</span>];
+          <a href="http://apps.neotomadb.org/explorer">Tilia API</a> [<span v-if="this.ping['tilia-dev'] === true" class="online">Online</span>
+                     <span v-else class="offline">Offline</span>]
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -39,7 +28,7 @@
     data () {
       return {
         msg: 'Contact data rendered.',
-        ping: { "api-dev": null, "explorer": null, "api": null }
+        ping: { "api-dev": null, "explorer": null, "api": null, "tilia-dev": null }
       }
     },
     methods: {
@@ -62,6 +51,12 @@
               { mode: "no-cors" })
           .then( (response) => {
             self.ping["explorer"] = response.status === 0;
+          })
+          .catch(err => console.log(err));
+
+        fetch("http://tilia-dev.neotomadb.org/api/")
+          .then( (response) => {
+            self.ping["tilia-dev"] = response.status === 200;
           })
           .catch(err => console.log(err));
 

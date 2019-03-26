@@ -1,79 +1,83 @@
 <template>
   <div class="componentbox">
-    <div class="sitebox">
-      <div class="textbox">
-        <h1>Neotoma Dataset {{ this.dsid }}</h1>
-        <h2>{{items.site.sitename}}</h2>
-        <h3>{{items.datasettype}} Dataset</h3>
-        <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
-          <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have limited associated metadata.  Please see the associated datasets below for more complete metadata.
+    <div v-if='items'>
+      <div class="sitebox">
+        <div class="textbox">
+          <h1>Neotoma Dataset {{ this.dsid }}</h1>
+          <h2>{{items.site.sitename}}</h2>
+          <h3>{{items.datasettype}} Dataset</h3>
+          <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
+            <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have limited associated metadata.  Please see the associated datasets below for more complete metadata.
+          </div>
+          <strong><small>{{items.dataset[0].database}}</small></strong>
+          <p><strong>Site Description: </strong><em>{{items.site.sitedescription}}</em></p>
+          <p><strong>Site Notes: </strong><em>{{items.site.sitenotes}}</em></p>
         </div>
-        <strong><small>{{items.dataset[0].database}}</small></strong>
-        <p><strong>Site Description: </strong><em>{{items.site.sitedescription}}</em></p>
-        <p><strong>Site Notes: </strong><em>{{items.site.sitenotes}}</em></p>
-      </div>
-      <div class='mapbox'>
-        <div class='map'>
-          <l-map :zoom = 5 :center = items.coordinates >
-            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-            <l-marker :lat-lng= items.coordinates ></l-marker>
-          </l-map>
+        <div class='mapbox'>
+          <div class='map'>
+            <l-map :zoom = 5 :center = items.coordinates >
+              <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+              <l-marker :lat-lng= items.coordinates ></l-marker>
+            </l-map>
+          </div>
+          <small><strong>Coordinates</strong>: {{items.coord}}</small>
         </div>
-        <small><strong>Coordinates</strong>: {{items.coordinates}}</small>
       </div>
     </div>
-    <div id="container">
-      <div v-if="items.doi[1]==='No DOI minted'">
-        <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
-      </div>
-      <div v-else>
-        <a target="_blank" :href="items.doi[0]">
-           <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
-        </a>
-      </div>
-      <a target="_blank" :href=items.explorer>
-        <div class="buttondiv">
-          Neotoma Explorer Link
+    <div v-if="items">
+      <div id="container">
+        <div v-if="items.doi[1]==='No DOI minted'">
+          <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
         </div>
-      </a>
-      <div v-if="items.datasettype == 'Geochronologic'">
+        <div v-else>
+          <a target="_blank" :href="items.doi[0]">
+             <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
+          </a>
+        </div>
+        <a target="_blank" :href=items.explorer>
           <div class="buttondiv">
-            Current Data Disabled
-          </div>
-      </div>
-      <div v-else>
-        <a target="_blank" :href=items.currjson>
-          <div class="buttondiv">
-            Download Current Data (JSON)
+            Neotoma Explorer Link
           </div>
         </a>
+        <div v-if="items.datasettype == 'Geochronologic'">
+            <div class="buttondiv">
+              Current Data Disabled
+            </div>
+        </div>
+        <div v-else>
+          <a target="_blank" :href=items.currjson>
+            <div class="buttondiv">
+              Download Current Data (JSON)
+            </div>
+          </a>
+        </div>
+        <div v-if="items.datasettype == 'Geochronologic'">
+            <div class="buttondiv">
+              Data As Uploaded Disabled
+            </div>
+        </div>
+        <div v-else>
+          <a target="_blank" :href=items.frozenjson>
+            <div class="buttondiv">
+              Download Data As Uploaded (JSON)
+            </div>
+          </a>
+        </div>
       </div>
-      <div v-if="items.datasettype == 'Geochronologic'">
-          <div class="buttondiv">
-            Data As Uploaded Disabled
-          </div>
+    </div>
+
+    <div v-if="items">
+      <div v-if="items.doi.length > 0">
+        <script type="application/ld+json">
+          {{ datasetDOI }}
+        </script>
       </div>
       <div v-else>
-        <a target="_blank" :href=items.frozenjson>
-          <div class="buttondiv">
-            Download Data As Uploaded (JSON)
-          </div>
-        </a>
+        <script type="application/ld+json">
+          {{ buildSchema }}
+        </script>
       </div>
-
     </div>
-
-    <div v-if="items.doi.length > 0">
-      <script type="application/ld+json">
-        {{ datasetDOI }}
-      </script>
-    </div>
-    <div v-else>
-      <script type="application/ld+json">
-        {{ buildSchema }}
-      </script>
-    </div>
-
   </div>
 </template>
 
@@ -147,6 +151,8 @@
               .map(x => x / coordlen)
               .reverse()
           }
+
+          self.items.coord = self.items.coordinates.map(x => Math.round(x * 100) / 100);
       });
     },
     mounted: {

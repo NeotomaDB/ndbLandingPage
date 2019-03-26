@@ -6,7 +6,8 @@
 
     <div v-if="this.dataset.length > 0" class="cardbox">
       <div v-for="i in this.dataset"  class="namecard">
-        <small>[<strong><a target="_blank" :href= "i.datasetid">{{ i.datasetid }}</a></strong>]</small> {{ i.datasettype.charAt(0).toUpperCase() + i.datasettype.slice(1) }}
+        <small>[<strong><a target="_blank" :href= "i.datasetid">{{ i.datasetid }}</a></strong>]</small> {{ i.datasettype.charAt(0).toUpperCase() + i.datasettype.slice(1) }}<br>
+        <small><strong>{{i.database}}</strong></small>
       </div>
     </div>
     <div v-else>
@@ -46,8 +47,17 @@ export default {
           fetch('http://api-dev.neotomadb.org/v2.0/data/sites/' + siteid + '/datasets')
             .then((response) => { return response.json() })
             .then((data) => {
-              var outsets =  data.data[0].dataset.filter( x=> !(x.datasetid === parseInt(this.dsid) ))
-              self.dataset = outsets.filter((v, i, a) => a.map(x => x.datasetid).indexOf(v.datasetid) === i);
+              var dsdt = data.data
+              self.dataset = dsdt.map(x => x.dataset
+                .map( function(y)
+                  {
+                    return {datasetid: y.datasetid,
+                            datasettype: y.datasettype,
+                            database: y.database}
+                  }))
+              .flat()
+              .filter(x => x.datasetid !== parseInt(this.dsid))
+
             })
       })
 

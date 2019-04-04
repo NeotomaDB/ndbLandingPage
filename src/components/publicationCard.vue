@@ -1,17 +1,18 @@
 <template>
   <div class="componentbox">
+
     <h2>Publications</h2>
-    <div v-if="this.pubs">
-      <div v-if="this.pubs.length > 0" class="cardbox">
-        <div v-for="i in this.pubs" class="namecard">
-          <div class="pubtag">
-            <div v-if="i.doi !== null"><a target="_blank" :href="'http://dx.doi.org/' + i.doi"><img src="@/assets/DOI_logo.svg" class="doi"></a></div>{{i.citation}}
-          </div>
-        </div>
+
+    <div v-if="this.pubs.length > 0" class="cardbox">
+      <div v-for="i in this.pubs" class="namecard">
+        <div v-if="i.doi !== null">
+          <a target="_blank" :href="'http://dx.doi.org/' + i.doi">
+            <img src="@/assets/DOI_logo.svg" class="doi">
+          </a></div>{{i.citation}}
       </div>
-      <div v-else>
-        The dataset has no associated publications (check associated datasets).
-      </div>
+    </div>
+    <div v-else>
+      The dataset has no associated publications (check associated datasets).
     </div>
   </div>
 </template>
@@ -32,6 +33,9 @@
         .then((response) => { return response.json() })
         .then((data) => {
           /* Modifying the values and processing the inputs */
+          if (data.data === null) {
+            data.data = [];
+          }
           self.pubs = data.data
         })
     },

@@ -28,6 +28,12 @@ const router = new VueRouter({
       path: "/:dsid/",
       component: App,
       props: true
+    },
+    {
+      path: "/datasets/:dsid/",
+      alias: "/:dsid",
+      component: App,
+      props: true
     }
   ]
 })

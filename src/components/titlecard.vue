@@ -4,14 +4,14 @@
       <div class="sitebox">
         <div class="textbox">
           <h1>Neotoma Dataset {{ this.dsid }}</h1>
-          <h2>{{items.site.sitename}}</h2>
+          <h2>{{items.sitename}}</h2>
           <h3>{{items.datasettype}} Dataset</h3>
           <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
             <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have limited associated metadata.  Please see the associated datasets below for more complete metadata.
           </div>
-          <strong><small>{{items.dataset[0].database}}</small></strong>
-          <p><strong>Site Description: </strong><em>{{items.site.sitedescription}}</em></p>
-          <p><strong>Site Notes: </strong><em>{{items.site.sitenotes}}</em></p>
+          <strong><small>{{items.database}}</small></strong>
+          <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
+          <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
         </div>
         <div class='mapbox'>
           <div class='map'>
@@ -31,7 +31,7 @@
         </div>
         <div v-else>
           <a target="_blank" :href="items.doi[0]">
-             <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
+             <div class="buttondiv">DOI: {{ items.doi[1][0] }}</div>
           </a>
         </div>
         <a target="_blank" :href=items.explorer>
@@ -100,8 +100,9 @@
     },
     data () {
       return {
-        this: {pubs: null, dataset: null},
-        items: null,
+        this: {pubs: [], dataset: []},
+        items: [],
+        datasetDOI: [],
         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012', }
     },
@@ -112,16 +113,16 @@
         .then((response) => { return response.json() })
         .then((data) => {
           /* Modifying the values and processing the inputs */
-          if(data.data.length == 0){
+          if(data.data.length === 0 && dsid != 9999999){
             this.$router.push('/');
           }
 
-          self.items = data.data[0]
-          self.items.datasettype = self.items.dataset[0].datasettype.charAt(0).toUpperCase() + self.items.dataset[0].datasettype.slice(1);
-          self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.dataset[0].datasetid;
-          self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.dataset[0].datasetid;
-          self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/frozen/" + self.items.dataset[0].datasetid;
-          self.items.loc = JSON.parse(self.items.site.geography);
+          self.items = data.data[0].site
+          self.items.datasettype = self.items.datasets[0].datasettype.charAt(0).toUpperCase() + self.items.datasets[0].datasettype.slice(1);
+          self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.datasets[0].datasetid;
+          self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.datasets[0].datasetid;
+          self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/frozen/" + self.items.datasets[0].datasetid;
+          self.items.loc = JSON.parse(self.items.geography);
           self.items.coordinates = self.items.loc.coordinates.reverse();
 
           if (self.items.datasettype === 'Geochronologic') {
@@ -129,18 +130,18 @@
             self.items.frozenjson = ''
           }
 
-          if (self.items.dataset[0].doi == null) {
+          if (self.items.datasets[0].doi == null) {
             self.items.doi = ['', 'No DOI minted']
           } else {
-            self.items.doi = ['https://dx.doi.org/'+ self.items.dataset[0].doi, self.items.dataset[0].doi ]
+            self.items.doi = ['https://dx.doi.org/'+ self.items.datasets[0].doi, self.items.datasets[0].doi ]
           }
-          if (self.items.site.sitedescription === null) {
-            self.items.site.sitedescription = "No description exists for this site."
+          if (self.items.sitedescription === null) {
+            self.items.sitedescription = "No description exists for this site."
           }
-          if (self.items.site.sitenotes === null) {
-            self.items.site.sitenotes = "No site notes exists for this site."
+          if (self.items.sitenotes === null) {
+            self.items.sitenotes = "No site notes exists for this site."
           }
-          if (self.items.dataset[0].doi === null) {
+          if (self.items.datasets[0].doi === null) {
             self.items.DOI = "No DOI has been minted for this site."
           }
 
@@ -196,12 +197,12 @@
           },
           "spatialCoverage": {
             "@type": "Place",
-            "name": this.items.site.sitename + " " + this.items.datasettype + " dataset",
+            "name": this.items.sitename + " " + this.items.datasettype + " dataset",
             "geo": {
                 "@type": "GeoCoordinates",
                 "latitude": this.items.coordinates[0],
                 "longitude": this.items.coordinates[1],
-                "elevation": this.items.site.altitude
+                "elevation": this.items.altitude
             }
           }
         }

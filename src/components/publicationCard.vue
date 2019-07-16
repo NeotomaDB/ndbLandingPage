@@ -23,7 +23,7 @@
     data () {
       return {
         msg: 'Common data rendered.',
-        pubs: null
+        pubs: []
       }
     },
     created () {
@@ -32,6 +32,7 @@
       fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/publications')
         .then((response) => { return response.json() })
         .then((data) => {
+          console.log(data)
           /* Modifying the values and processing the inputs */
           if (data.data === null) {
             data.data = [];

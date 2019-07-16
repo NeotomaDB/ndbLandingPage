@@ -1,5 +1,6 @@
 <template>
   <div class="componentbox">
+
     <h2>Other Associated Datasets</h2>
 
     <h3>Datasets at the Same Site</h3>
@@ -28,7 +29,7 @@ export default {
   data () {
     return {
       msg: 'Common data rendered.',
-      dataset: null,
+      dataset: [],
       pbndataset: null,
       site: null
     }
@@ -48,13 +49,12 @@ export default {
             .then((response) => { return response.json() })
             .then((data) => {
               var dsdt = data.data
-              self.dataset = dsdt.map(x => x.dataset
-                .map( function(y)
+              self.dataset = dsdt[0].site.datasets.map( function(y)
                   {
                     return {datasetid: y.datasetid,
                             datasettype: y.datasettype,
                             database: y.database}
-                  }))
+                  })
               .flat()
               .filter(x => x.datasetid !== parseInt(this.dsid))
 

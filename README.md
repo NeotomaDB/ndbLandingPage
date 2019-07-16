@@ -8,7 +8,7 @@ The page leverages the [Neotoma v2 API](http://github.com/NeotomaDB/api_nodetest
 
 *   [Simon Goring](http://goring.org)
 *   Michael Stryker
-*   The Neotoma Paleoecology Database
+*   [The Neotoma Paleoecology Database](http://neotomadb.org)
 
 ## Deploying the App
 

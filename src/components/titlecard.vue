@@ -5,11 +5,10 @@
         <div class="textbox">
           <h1>Neotoma Dataset {{ this.dsid }}</h1>
           <h2>{{items.sitename}}</h2>
-          <h3>{{items.datasettype}} Dataset</h3>
+          <h3>{{items.datasettype}} Dataset - {{items.database}}</h3>
           <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
             <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have limited associated metadata.  Please see the associated datasets below for more complete metadata.
           </div>
-          <strong><small>{{items.database}}</small></strong>
           <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
           <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
         </div>
@@ -118,6 +117,7 @@
           }
 
           self.items = data.data[0].site
+          self.items.database = self.items.datasets[0].database
           self.items.datasettype = self.items.datasets[0].datasettype.charAt(0).toUpperCase() + self.items.datasets[0].datasettype.slice(1);
           self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.datasets[0].datasetid;
           self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.datasets[0].datasetid;

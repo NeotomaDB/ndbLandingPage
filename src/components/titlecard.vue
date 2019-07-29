@@ -112,7 +112,7 @@
         .then((response) => { return response.json() })
         .then((data) => {
           /* Modifying the values and processing the inputs */
-          if(data.data.length === 0 && dsid != 9999999){
+          if(data.data.length === 0){
             this.$router.push('/');
           }
 

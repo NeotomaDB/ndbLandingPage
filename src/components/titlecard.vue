@@ -171,6 +171,8 @@
           "@context": "http://schema.org",
           "@type": "Dataset",
           "license": "https://creativecommons.org/licenses/by/4.0/deed.en_US",
+          "name": this.items.sitename + " " + this.items.datasettype + " dataset",
+          "description": "Landing page for " + this.items.datasettype + "data from " + this.items.sitename + ", including data download options and linked resources.",
           "includedInDataCatalog": {
             "@type": "DataCatalog",
             "about": "Paleoecology",

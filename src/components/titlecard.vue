@@ -195,7 +195,8 @@
             "@type":"DataDownload",
             "contentUrl": this.items.currjson,
             "datePublished": "2018-02-02 14:24:27",
-            "inLanguage": "en"
+            "inLanguage": "en",
+            "encodingFormat": "application/json"
           },
           "spatialCoverage": {
             "@type": "Place",

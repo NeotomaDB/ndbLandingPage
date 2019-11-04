@@ -89,6 +89,8 @@
   box-shadow: 2px 5px 5px #888888;
   white-space: pre-wrap;
   background: #ffffff66;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .light {

@@ -11,11 +11,16 @@
           </div>
           <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
           <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
+          <div class='d-block d-sm-none'>
+            The dynamic site map is not displayed on mobile displays.  Use the Neotoma Explorer link.<br>
+            <small><strong>Coordinates</strong>: {{items.coord}}</small>
+          </div>
         </div>
-        <div class='mapbox'>
+
+        <div class='mapbox d-none d-sm-block'  v-b-tooltip.hover :title="attribution">
           <div class='map'>
-            <l-map :zoom = 5 :center = items.coordinates >
-              <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+            <l-map :zoom = 5 :center = items.coordinates>
+              <l-tile-layer :url="url"></l-tile-layer>
               <l-marker :lat-lng= items.coordinates ></l-marker>
             </l-map>
           </div>
@@ -100,10 +105,13 @@
     data () {
       return {
         this: {pubs: [], dataset: []},
-        items: [],
+        items: {doi: [null,null]},
         datasetDOI: [],
+        buildSchema: [],
         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012', }
+        attribution: ['Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+                      '']
+      }
     },
     created() {
       let self = this
@@ -142,7 +150,7 @@
             self.items.sitenotes = "No site notes exists for this site."
           }
           if (self.items.datasets[0].doi === null) {
-            self.items.DOI = "No DOI has been minted for this site."
+            self.items.doi = "No DOI has been minted for this site."
           }
 
           if (self.items.coordinates[0].length > 1) {
@@ -219,8 +227,8 @@
           output.identifier = {
               "@type": "PropertyValue",
               "propertyID": "http://purl.org/spar/datacite/doi",
-              "url": this.items.doi[0],
-              "value": this.items.doi[1]
+              "url": this.items.dataset[0].doi[0],
+              "value": this.items.dataset[0].doi[1]
           }
         }
 

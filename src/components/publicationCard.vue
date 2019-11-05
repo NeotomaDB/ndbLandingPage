@@ -11,7 +11,7 @@
     <h2>Publications</h2>
 
     <div v-if="this.pubs.length > 0" class="cardbox">
-      <div v-for="i in this.pubs" :key="i.publicationid" class="namecard">
+      <div v-for="i in this.pubs" v-bind:key="i.publicationid" class="namecard">
         <div v-if="i.doi !== null">
           <a target="_blank" :href="'http://dx.doi.org/' + i.doi">
             <img src="@/assets/DOI_logo.svg" class="doi">

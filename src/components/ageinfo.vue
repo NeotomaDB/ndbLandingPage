@@ -5,7 +5,7 @@
       There is no chronological information associated with this record.
     </div>
     <div v-else class="cardbox">
-      <div v-for="i in this.items" class="namecard">
+      <div v-for="i in this.items" v-bind:key="i.chronologyid" class="namecard">
         <h3>Chronology: {{i.chronologyname}}</h3>
 
         <strong>Age Type</strong>: {{i.agetype}}<br>

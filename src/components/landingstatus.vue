@@ -41,20 +41,20 @@
           })
           .catch(err => console.log(err));
 
-        fetch("http://api.neotomadb.org")
+        fetch("https://api.neotomadb.org")
           .then( (response) => {
             self.ping["api"] = response.status === 200;
           })
           .catch(err => console.log(err));
 
-        fetch("http://apps.neotomadb.org/explorer",
+        fetch("https://apps.neotomadb.org/explorer",
               { mode: "no-cors" })
           .then( (response) => {
             self.ping["explorer"] = response.status === 0;
           })
           .catch(err => console.log(err));
 
-        fetch("http://tilia-dev.neotomadb.org/api/")
+        fetch("https://tilia-dev.neotomadb.org/api/")
           .then( (response) => {
             self.ping["tilia-dev"] = response.status === 200;
           })

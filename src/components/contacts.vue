@@ -2,7 +2,7 @@
   <div class="componentbox">
     <h2>Principal Investigator</h2>
     <div class="cardbox">
-      <div v-for="i in items" class="namecard">
+      <div v-for="i in items" :key="i.fullName" class="namecard">
         <strong>{{i.fullName}}</strong>
         <div v-if="i.email !== null"><small>{{i.email}}</small></div>
         <div v-if="i.email === null"><small>No email address on record</small></div>

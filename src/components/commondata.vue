@@ -5,7 +5,7 @@
 
     <h3>Datasets at the Same Site</h3>
     <div v-if="this.dataset.length > 0" class="cardbox">
-      <div v-for="i in this.dataset"  class="namecard">
+      <div v-for="i in this.dataset" :key="i.datasetid" class="namecard">
         <small>[<strong><a target="_blank" :href= "i.datasetid">{{ i.datasetid }}</a></strong>]</small> {{ i.datasettype.charAt(0).toUpperCase() + i.datasettype.slice(1) }}<br>
         <small><strong>{{i.database}}</strong></small>
       </div>

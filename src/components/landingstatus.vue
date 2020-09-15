@@ -35,13 +35,13 @@
       hitstuff: function() {
         let self = this
 
-        fetch("http://api-dev.neotomadb.org/v2.0/data/datasets/12")
+        fetch(process.env.APIDEV_ENDPOINT + '/v2.0/data/datasets/12')
           .then( (response) => {
             self.ping["api-dev"] = response.status === 200;
           })
           .catch(err => console.log(err));
 
-        fetch("https://api.neotomadb.org")
+        fetch(process.env.API_ENDPOINT + '/v2.0/data/datasets/12')
           .then( (response) => {
             self.ping["api"] = response.status === 200;
           })
@@ -54,7 +54,7 @@
           })
           .catch(err => console.log(err));
 
-        fetch("https://tilia-dev.neotomadb.org/api/")
+        fetch(process.env.TILIA_ENDPOINT + '/api')
           .then( (response) => {
             self.ping["tilia-dev"] = response.status === 200;
           })

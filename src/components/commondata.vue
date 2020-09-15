@@ -37,14 +37,14 @@ export default {
     fetchData: function () {
       let self = this
 
-      fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/sites')
+      fetch(process.env.API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid + '/sites')
         .then((response) => { return response.json() })
         .then((data) => {
           /* Modifying the values and processing the inputs */
           var siteid = data.data[0].siteid
           self.site = siteid
 
-          fetch('http://api-dev.neotomadb.org/v2.0/data/sites/' + siteid + '/datasets')
+          fetch(process.env.API_ENDPOINT + '/v2.0/data/sites/' + siteid + '/datasets')
             .then((response) => { return response.json() })
             .then((data) => {
               var dsdt = data.data

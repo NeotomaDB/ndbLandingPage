@@ -35,7 +35,7 @@
       fetchData: function () {
         let self = this
 
-        fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/chronology')
+        fetch(process.env.API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid + '/chronology')
           .then((response) => { return response.json() })
           .then((data) => {
             /* Modifying the values and processing the inputs */

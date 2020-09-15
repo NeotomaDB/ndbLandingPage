@@ -115,7 +115,7 @@
     created() {
       let self = this
 
-      fetch(process.env.API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid)
+      fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid)
         .then((response) => { return response.json() })
         .then((data) => {
           /* Modifying the values and processing the inputs */
@@ -127,8 +127,8 @@
           self.items.database = self.items.datasets[0].database
           self.items.datasettype = self.items.datasets[0].datasettype.charAt(0).toUpperCase() + self.items.datasets[0].datasettype.slice(1);
           self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.datasets[0].datasetid;
-          self.items.currjson = process.env.API_ENDPOINT + "/v2.0/data/download/" + self.items.datasets[0].datasetid;
-          self.items.frozenjson = process.env.API_ENDPOINT + "/v2.0/data/frozen/" + self.items.datasets[0].datasetid;
+          self.items.currjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/download/" + self.items.datasets[0].datasetid;
+          self.items.frozenjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/frozen/" + self.items.datasets[0].datasetid;
           self.items.loc = JSON.parse(self.items.geography);
           self.items.coordinates = self.items.loc.coordinates.reverse();
 

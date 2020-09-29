@@ -1,6 +1,7 @@
 const http = require('http')
 const fs = require('fs')
-const httpPort = 3002
+
+const httpPort = process.env.VUE_APP_httpPort
 
 http.createServer((req, res) => {
   fs.readFile('index.htm', 'utf-8', (err, content) => {

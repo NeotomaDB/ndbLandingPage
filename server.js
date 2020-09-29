@@ -1,6 +1,6 @@
 /* Based on instructions at https://www.youtube.com/watch?v=yfW9knTBR90 */
 const express = require('express');
-const port = process.env.PORT || 3002;
+const port = process.env.VUE_APP_httpPort;
 
 const app = express();
 

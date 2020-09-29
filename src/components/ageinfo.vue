@@ -1,17 +1,21 @@
 <template>
   <div class="componentbox">
     <h2>Chronology</h2>
-    <div v-if="this.items == null">
-      There is no chronological information associated with this record.
-    </div>
-    <div v-else class="cardbox">
-      <div v-for="i in this.items" v-bind:key="i.chronologyid" class="namecard">
-        <h3>Chronology: {{i.chronologyname}}</h3>
 
-        <strong>Age Type</strong>: {{i.agetype}}<br>
-        <strong>Prepared by</strong>: {{i.preparedby.firstname + " " + i.preparedby.familyname}}<br>
-        <strong>Age Range</strong>: {{i.chronologyagepan.younger}} to {{i.chronologyagepan.older}}
-      </div>
+    <!-- <div v-if="this.items == null">
+      There is no chronological information associated with this record.
+    </div>-->
+    <div class="cardbox">
+        <div v-for="i in items" v-bind:key="i.chronologyid" class="namecard">
+          <h3>Chronology: {{i}}</h3>
+<!--
+          <strong>Age Type</strong>: {{i.agetype}}<br>''
+          <div v-if="i.preparedby">
+            <strong>Prepared by</strong>: {{i.preparedby.firstname + " " + i.preparedby.familyname}}<br>
+          </div>
+          <strong>Age Range</strong>: {{i.reliableagespan.younger}} to {{i.reliableagespan.older}}
+        -->
+        </div>
     </div>
   </div>
 </template>
@@ -39,7 +43,7 @@
           .then((response) => { return response.json() })
           .then((data) => {
             /* Modifying the values and processing the inputs */
-            self.items = data.data[0].chronology
+            self.items = data.data
         });
       }
     },

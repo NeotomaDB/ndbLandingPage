@@ -1,7 +1,8 @@
 const http = require('http')
 const fs = require('fs')
+require('dotenv').config()
 
-const httpPort = process.env.VUE_APP_httpPort
+const httpPort = process.env.VUE_APP_HTTP_PORT
 
 http.createServer((req, res) => {
   fs.readFile('index.htm', 'utf-8', (err, content) => {

@@ -1,6 +1,5 @@
 <template>
   <div class="componentbox">
-    <div v-if='items'>
       <div class="sitebox">
         <div class="textbox">
           <h1>Neotoma Dataset {{ this.dsid }}</h1>
@@ -27,17 +26,16 @@
           <small><strong>Coordinates</strong>: {{items.coord}}</small>
         </div>
       </div>
-    </div>
-    <div v-if="items">
+    <div v-if='items'>
       <div id="container">
         <div v-if="items.doi[1]==='No DOI minted'">
           <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
         </div>
         <div v-else>
-          <a target="_blank" :href="items.doi[0]">
-             <div class="buttondiv">DOI: {{ items.doi[1][0] }}</div>
-          </a>
-        </div>
+            <a target="_blank" :href="items.doi[0]">
+               <div class="buttondiv">DOI: {{ items.doi[1][0] }}</div>
+            </a>
+          </div>
         <a target="_blank" :href=items.explorer>
           <div class="buttondiv">
             Neotoma Explorer Link
@@ -69,7 +67,6 @@
         </div>
       </div>
     </div>
-
     <div v-if="items">
       <div v-if="items.doi.length > 0">
         <script type="application/ld+json">

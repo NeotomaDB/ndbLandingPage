@@ -1,17 +1,20 @@
 <template>
   <div class="componentbox">
     <h2>Chronology</h2>
-    <div v-if="this.items == null">
-      There is no chronological information associated with this record.
-    </div>
-    <div v-else class="cardbox">
-      <div v-for="i in this.items" v-bind:key="i.chronologyid" class="namecard">
-        <h3>Chronology: {{i.chronologyname}}</h3>
 
-        <strong>Age Type</strong>: {{i.agetype}}<br>
-        <strong>Prepared by</strong>: {{i.preparedby.firstname + " " + i.preparedby.familyname}}<br>
-        <strong>Age Range</strong>: {{i.chronologyagepan.younger}} to {{i.chronologyagepan.older}}
-      </div>
+    <!-- <div v-if="this.items == null">
+      There is no chronological information associated with this record.
+    </div>-->
+    <div class="cardbox">
+        <div v-for="i in items" v-bind:key="i.chronologyid" class="namecard">
+          <h3>{{i.chronology.chronologyName}}</h3>
+          <strong>Age Type</strong>: {{i.chronology.agetype}}<br>
+          <strong>Model Type</strong>: {{i.chronology.modelType}}<br>
+          <div v-if="i.chronology.preparedby">
+            <strong>Prepared by</strong>: {{i.chronology.preparedby.firstname + " " + i.chronology.preparedby.familyname}}<br>
+          </div>
+          <strong>Age Range</strong>: {{i.chronology.reliableagespan.younger}} to {{i.chronology.reliableagespan.older}}
+        </div>
     </div>
   </div>
 </template>
@@ -35,11 +38,11 @@
       fetchData: function () {
         let self = this
 
-        fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid + '/chronology')
+        fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid + '/chronology')
           .then((response) => { return response.json() })
           .then((data) => {
             /* Modifying the values and processing the inputs */
-            self.items = data.data[0].chronologies
+            self.items = data.data
         });
       }
     },

@@ -1,6 +1,5 @@
 <template>
   <div class="componentbox">
-    <div v-if='items'>
       <div class="sitebox">
         <div class="textbox">
           <h1>Neotoma Dataset {{ this.dsid }}</h1>
@@ -27,17 +26,16 @@
           <small><strong>Coordinates</strong>: {{items.coord}}</small>
         </div>
       </div>
-    </div>
-    <div v-if="items">
+    <div v-if='items'>
       <div id="container">
         <div v-if="items.doi[1]==='No DOI minted'">
           <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
         </div>
         <div v-else>
-          <a target="_blank" :href="items.doi[0]">
-             <div class="buttondiv">DOI: {{ items.doi[1][0] }}</div>
-          </a>
-        </div>
+            <a target="_blank" :href="items.doi[0]">
+               <div class="buttondiv">DOI: {{ items.doi[1][0] }}</div>
+            </a>
+          </div>
         <a target="_blank" :href=items.explorer>
           <div class="buttondiv">
             Neotoma Explorer Link
@@ -69,7 +67,6 @@
         </div>
       </div>
     </div>
-
     <div v-if="items">
       <div v-if="items.doi.length > 0">
         <script type="application/ld+json">
@@ -115,7 +112,7 @@
     created() {
       let self = this
 
-      fetch('http://api-dev.neotomadb.org/v2.0/data/datasets/' + this.dsid)
+      fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid)
         .then((response) => { return response.json() })
         .then((data) => {
           /* Modifying the values and processing the inputs */
@@ -127,8 +124,8 @@
           self.items.database = self.items.datasets[0].database
           self.items.datasettype = self.items.datasets[0].datasettype.charAt(0).toUpperCase() + self.items.datasets[0].datasettype.slice(1);
           self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.datasets[0].datasetid;
-          self.items.currjson = "http://api-dev.neotomadb.org/v2.0/data/download/" + self.items.datasets[0].datasetid;
-          self.items.frozenjson = "http://api-dev.neotomadb.org/v2.0/data/frozen/" + self.items.datasets[0].datasetid;
+          self.items.currjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/download/" + self.items.datasets[0].datasetid;
+          self.items.frozenjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/frozen/" + self.items.datasets[0].datasetid;
           self.items.loc = JSON.parse(self.items.geography);
           self.items.coordinates = self.items.loc.coordinates.reverse();
 

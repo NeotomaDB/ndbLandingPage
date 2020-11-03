@@ -1,3 +1,4 @@
+.env
 package-lock.json
 .DS_Store
 node_modules
@@ -25,4 +26,3 @@ Thumbs.db
 *.log
 public/
 src/_drafts
-

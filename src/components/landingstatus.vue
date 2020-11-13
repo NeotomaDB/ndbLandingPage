@@ -8,13 +8,13 @@
           </b-card>
         </b-col>
         <b-col cols="7" align-self="center">
-          <a href="http://api.neotomadb.org">Neotoma API</a> [<span v-if="this.ping['api'] === true" class="online">Online</span>
+          <a href="https://api.neotomadb.org">Neotoma API</a> [<span v-if="this.ping['api'] === true" class="online">Online</span>
                        <span v-else class="offline">Offline</span>];
-          <a href="http://api-dev.neotomadb.org">Dev. API</a> [<span v-if="this.ping['api-dev'] === true" class="online">Online</span>
+          <a href="https://api-dev.neotomadb.org">Dev. API</a> [<span v-if="this.ping['api-dev'] === true" class="online">Online</span>
                     <span v-else class="offline">Offline</span>];
-          <a href="http://apps.neotomadb.org/explorer">Explorer</a> [<span v-if="this.ping['explorer'] === true" class="online">Online</span>
+          <a href="https://apps.neotomadb.org/explorer">Explorer</a> [<span v-if="this.ping['explorer'] === true" class="online">Online</span>
                     <span v-else class="offline">Offline</span>];
-          <a href="http://apps.neotomadb.org/explorer">Tilia API</a> [<span v-if="this.ping['tilia-dev'] === true" class="online">Online</span>
+          <a href="https://apps.neotomadb.org/explorer">Tilia API</a> [<span v-if="this.ping['tilia-dev'] === true" class="online">Online</span>
                      <span v-else class="offline">Offline</span>]
         </b-col>
       </b-row>
@@ -47,7 +47,7 @@
           })
           .catch(err => console.log(err));
 
-        fetch("http://apps.neotomadb.org/explorer",
+        fetch("https://apps.neotomadb.org/explorer",
               { mode: "no-cors" })
           .then( (response) => {
             self.ping["explorer"] = response.status === 0;

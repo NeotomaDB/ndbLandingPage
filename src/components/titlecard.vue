@@ -137,7 +137,8 @@
           if (self.items.datasets[0].doi == null) {
             self.items.doi = ['', 'No DOI minted']
           } else {
-            self.items.doi = ['https://dx.doi.org/'+ self.items.datasets[0].doi, self.items.datasets[0].doi ]
+            self.items.doi = ['https://dx.doi.org/' + self.items.datasets[0].doi[0],
+                              self.items.datasets[0].doi]
           }
           if (self.items.sitedescription === null) {
             self.items.sitedescription = "No description exists for this site."

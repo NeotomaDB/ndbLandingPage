@@ -13,6 +13,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "compression": "^1.7.4",
+    "compression-webpack-plugin": "^7.1.2",
     "css-loader": "^1.0.1",
     "d3": "^5.16.0",
     "dotenv": "^8.2.0",

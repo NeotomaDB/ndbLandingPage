@@ -17,5 +17,5 @@ http.createServer((req, res) => {
     res.end(content)
   })
 }).listen(httpPort, () => {
-  console.log('Server listening on: http://localhost:%s', httpPort)
+  console.log('Server listening on: https://localhost:%s', httpPort)
 })

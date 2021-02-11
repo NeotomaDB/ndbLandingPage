@@ -1,5 +1,4 @@
 // vue.config.js
-const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   devServer: {

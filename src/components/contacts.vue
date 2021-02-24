@@ -1,9 +1,9 @@
 <template>
   <div class="componentbox">
-    <h2>Principal Investigator</h2>
+    <h2>Investigators</h2>
     <div class="cardbox">
       <div v-for="i in items" :key="i.fullName" class="namecard">
-        <strong>{{i.fullName}}</strong>
+        <strong>{{i.fullname}}</strong>
         <div v-if="i.email !== null"><small>{{i.email}}</small></div>
         <div v-if="i.email === null"><small>No email address on record</small></div>
         <div v-if="i.url !== null"><br><a :href=i.url>Research Website</a></div>
@@ -34,7 +34,7 @@ tatus
           .then((response) => { return response.json() })
           .then((data) => {
             /* Modifying the values and processing the inputs */
-            self.items = data.data[0].contact
+            self.items = data.data[0].contacts.contacts
         });
 
       }

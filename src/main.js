@@ -1,9 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
-import BootstrapVue from 'bootstrap-vue'
+// import BootstrapVue from 'bootstrap-vue'
 
 import App from './App.vue'
 import "leaflet/dist/leaflet.css";
+
+import { BContainer, BCol, BRow, BCard, BTooltip } from 'bootstrap-vue';
+Vue.component('b-container', BContainer);
+Vue.component('b-tooltip', BTooltip);
+Vue.component('b-col', BCol);
+Vue.component('b-row', BRow);
+Vue.component('b-card', BCard);
+
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+Vue.component('l-map', LMap);
+Vue.component('l-tile-layer', LTileLayer);
+Vue.component('l-marker', LMarker);
 
 // eslint-disable-next-line
 delete L.Icon.Default.prototype._getIconUrl
@@ -39,7 +51,7 @@ const router = new VueRouter({
 })
 
 Vue.use(VueRouter)
-Vue.use(BootstrapVue)
+// Vue.use(BootstrapVue)
 
 new Vue({
   el: '#app',

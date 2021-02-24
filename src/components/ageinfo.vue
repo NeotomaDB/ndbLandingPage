@@ -38,7 +38,7 @@
       fetchData: function () {
         let self = this
 
-        fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid + '/chronology')
+        fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/datasets/' + this.dsid + '/chronologies')
           .then((response) => { return response.json() })
           .then((data) => {
             /* Modifying the values and processing the inputs */

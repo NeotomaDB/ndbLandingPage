@@ -70,12 +70,7 @@
     <div v-if="items">
       <div v-if="items.doi.length > 0">
         <script type="application/ld+json">
-          {{ datasetDOI }}
-        </script>
-      </div>
-      <div v-else>
-        <script type="application/ld+json">
-          {{ buildSchema }}
+          {{ datasetDOIs }}
         </script>
       </div>
     </div>
@@ -84,7 +79,7 @@
 
 
 <script>
-  import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+
 
   export default {
     name: 'titleCard',
@@ -93,20 +88,25 @@
         required: true,
       },
     },
-    components: {
-      LMap,
-      LTileLayer,
-      LMarker
-    },
     data () {
       return {
         this: {pubs: [], dataset: []},
         items: {doi: [null,null]},
-        datasetDOI: [],
+        datasetDOIs: [],
         buildSchema: [],
         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
         attribution: ['Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
                       '']
+      }
+    },
+    methods: {
+      datasetDOI: function() {
+        let self = this;
+        self.datasetDOIs = 'https://dx.doi.org/' + self.items.datasets[0].doi[0];
+        /*fetch(self.items.doi[0], {headers: {'Accept': 'application/vnd.schemaorg.ld+json'}})
+        .then(data => { return data.text() })
+        .then(function(text) { self.datasetDOIs = text})
+        .catch(err => console.log(err))*/
       }
     },
     created() {
@@ -161,76 +161,9 @@
           self.items.coord = self.items.coordinates.map(x => Math.round(x * 100) / 100);
       });
     },
-    mounted: {
-      datasetDOI: function() {
-        var output = {}
-
-        fetch(this.items.doi[0], {headers: {'Accept': 'application/vnd.schemaorg.ld+json'}})
-        .then(response => response.json())
-        .then((data) => { return data })
-
-        return output;
-      },
-      buildSchema: function() {
-        var output = {
-          "@context": "http://schema.org",
-          "@type": "Dataset",
-          "license": "https://creativecommons.org/licenses/by/4.0/deed.en_US",
-          "name": this.items.sitename + " " + this.items.datasettype + " dataset",
-          "description": "Landing page for " + this.items.datasettype + "data from " + this.items.sitename + ", including data download options and linked resources.",
-          "includedInDataCatalog": {
-            "@type": "DataCatalog",
-            "about": "Paleoecology",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Neotoma Paleoecological Database",
-              "alternateName":"Neotoma",
-              "description":"The Neotoma Paleoecology Database and Community is an online hub for data, research, education, and discussion about paleoenvironments.",
-              "url": "http://neotomadb.org"
-            },
-            "funder": {
-              "@type":"Organization",
-              "name":"National Sciences Foundation",
-              "alternateName": "NSF",
-              "url": "http://nsf.gov"
-            }
-          },
-          "about": "",
-          "distribution":{
-            "@type":"DataDownload",
-            "contentUrl": this.items.currjson,
-            "datePublished": "2018-02-02 14:24:27",
-            "inLanguage": "en",
-            "encodingFormat": "application/json"
-          },
-          "spatialCoverage": {
-            "@type": "Place",
-            "name": this.items.sitename + " " + this.items.datasettype + " dataset",
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": this.items.coordinates[0],
-                "longitude": this.items.coordinates[1],
-                "elevation": this.items.altitude
-            }
-          }
-        }
-
-        if (!this.items.dataset[0].doi == null) {
-          output["@context"] = {
-            "@vocab": "http://schema.org/",
-            "datacite": "http://purl.org/spar/datacite/",
-          }
-
-          output.identifier = {
-              "@type": "PropertyValue",
-              "propertyID": "http://purl.org/spar/datacite/doi",
-              "url": this.items.dataset[0].doi[0],
-              "value": this.items.dataset[0].doi[1]
-          }
-        }
-
-        return output;
-      }
+    mounted() {
+      // this.schemaData();
+      this.datasetDOI();
     }
   }
 </script>

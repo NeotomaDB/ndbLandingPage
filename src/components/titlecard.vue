@@ -32,11 +32,11 @@
           <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
         </div>
         <div v-else>
-            <a target="_blank" :href="items.doi[0]">
+            <a target="_blank" :href="items.doi[0]" rel="noreferrer">
                <div class="buttondiv">DOI: {{ items.doi[1][0] }}</div>
             </a>
           </div>
-        <a target="_blank" :href=items.explorer>
+        <a target="_blank" :href=items.explorer rel="noreferrer">
           <div class="buttondiv">
             Neotoma Explorer Link
           </div>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div v-else>
-          <a target="_blank" :href=items.currjson>
+          <a target="_blank" :href=items.currjson rel="noreferrer">
             <div class="buttondiv">
               Download Current Data (JSON)
             </div>
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div v-else>
-          <a target="_blank" :href=items.frozenjson>
+          <a target="_blank" :href=items.frozenjson rel="noreferrer">
             <div class="buttondiv">
               Download Data As Uploaded (JSON)
             </div>
@@ -87,6 +87,9 @@
       dsid: {
         required: true,
       },
+    },
+    directives: {
+      'b-tooltip': 'b-tooltip'
     },
     data () {
       return {

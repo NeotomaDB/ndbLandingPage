@@ -7,7 +7,7 @@ export default new Router({
     routes: [
         {
             path: '/:id',
-            name: 'Page2',
+            name: 'Landing Page',
             component: Page2
         }
     ]

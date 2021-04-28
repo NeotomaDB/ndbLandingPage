@@ -12,10 +12,10 @@
 
     <div v-if="this.pubs.length > 0" class="cardbox">
       <div v-for="i in this.pubs" v-bind:key="i.publicationid" class="namecard">
-        <div v-if="i.doi !== null">
-          <a target="_blank" :href="'http://dx.doi.org/' + i.doi" rel="noreferrer">
+        <div v-if="i.publication.doi !== null">
+          <a target="_blank" :href="'http://dx.doi.org/' + i.publication.doi" rel="noreferrer">
             <img src="@/assets/DOI_logo.svg" class="doi" alt="DOI link to the dataset publication">
-          </a></div>{{i.citation}}
+          </a></div>{{i.publication.citation}}
       </div>
     </div>
     <div v-else>

@@ -55,7 +55,6 @@ Vue.use(VueRouter);
 Vue.use(VueGtag, {
   config: { id: 'G-3XDNWKENJ4' }
 }, router);
-// Vue.use(BootstrapVue)
 
 new Vue({
   el: '#app',

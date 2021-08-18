@@ -81,6 +81,11 @@ h3 { font-weight: 700;
 	 font-size: 100%;
 	}
 
+h2.status { font-weight: 700;
+  line-height: 100%;
+  font-size: 130%;
+}
+
 li, tr {
   font-family: "Raleway";
   color: rgba(0,0,0,0.8);

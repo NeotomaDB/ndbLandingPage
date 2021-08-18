@@ -24,7 +24,7 @@
       schemaData: function() { 
 
         var output = {
-          "@context": "http://schema.org",
+          "@context": "https://schema.org",
           "@type": "Dataset",
           "license": "https://creativecommons.org/licenses/by/4.0/deed.en_US",
           "name": this.items.sitename + " " + this.items.datasettype + " dataset",
@@ -37,13 +37,13 @@
               "name": "Neotoma Paleoecological Database",
               "alternateName":"Neotoma",
               "description":"The Neotoma Paleoecology Database and Community is an online hub for data, research, education, and discussion about paleoenvironments.",
-              "url": "http://neotomadb.org"
+              "url": "https://neotomadb.org"
             },
             "funder": {
               "@type":"Organization",
               "name":"National Sciences Foundation",
               "alternateName": "NSF",
-              "url": "http://nsf.gov"
+              "url": "https://nsf.gov"
             }
           },
           "about": "",
@@ -68,13 +68,13 @@
 
         if (!this.items.datasets[0].doi == null) {
           output["@context"] = {
-            "@vocab": "http://schema.org/",
-            "datacite": "http://purl.org/spar/datacite/",
+            "@vocab": "https://schema.org/",
+            "datacite": "https://purl.org/spar/datacite/",
           }
 
           output.identifier = {
               "@type": "PropertyValue",
-              "propertyID": "http://purl.org/spar/datacite/doi",
+              "propertyID": "https://purl.org/spar/datacite/doi",
               "url": this.items.datasets[0].doi[0],
               "value": this.items.datasets[0].doi[1]
           }

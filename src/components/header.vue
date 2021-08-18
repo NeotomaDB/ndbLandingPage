@@ -1,10 +1,10 @@
 <template>
   <div class="headerbox">
-    <div class="headermouse"><img src="@/assets/packrat.png"></div>
+    <div class="headermouse"><img src="@/assets/packrat.png" width=185 height=130></div>
     <div class="headername">
         <h1>Neotoma Paleoecology Database</h1>
         Dataset Archiving
-        <br><a>http://neotomadb.org</a>
+        <br><a>https://neotomadb.org</a>
     </div>
   </div>
 </template>

@@ -1,7 +1,6 @@
 {
   "name": "landingpages",
   "version": "0.1.0",
-  "sideEffects": false,
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

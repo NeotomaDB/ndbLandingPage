@@ -166,11 +166,7 @@
           }
 
           self.items.coord = self.items.coordinates.map(x => Math.round(x * 100) / 100);
-      });
-    },
-    updated() {
-      // this.schemaData();
-      this.datasetDOI();
+      })
     }
   }
 </script>

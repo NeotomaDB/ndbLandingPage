@@ -31,7 +31,9 @@
           "description": "Landing page for " + this.items.datasettype + " data from " + this.items.sitename + ", including data download options and linked resources.",
           "includedInDataCatalog": {
             "@type": "DataCatalog",
+            "name": this.items.database,
             "about": "Paleoecology",
+            "publication": "Williams JW, et al. (2018). The Neotoma Paleoecology Database, a multiproxy, international, community-curated data resource. Quaternary Research, 89(1), 156-177.",
             "publisher": {
               "@type": "Organization",
               "name": "Neotoma Paleoecological Database",
@@ -44,7 +46,8 @@
               "name":"National Sciences Foundation",
               "alternateName": "NSF",
               "url": "https://nsf.gov"
-            }
+            },
+            "isAccessibleForFree": true
           },
           "about": "",
           "distribution":{
@@ -56,7 +59,7 @@
           },
           "spatialCoverage": {
             "@type": "Place",
-            "name": this.items.sitename + " " + this.items.datasettype + " dataset",
+            "name": this.items.sitename,
             "geo": {
                 "@type": "GeoCoordinates",
                 "latitude": this.items.coordinates[0],

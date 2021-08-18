@@ -1,6 +1,6 @@
 <template>
   <div class="headerbox">
-    <div class="headermouse"><img src="@/assets/packrat.png" width=185 height=130></div>
+    <div class="headermouse"><img src="@/assets/packrat.png" width=185 height=130 alt="Neotoma logo, a packrat."></div>
     <div class="headername">
         <h1>Neotoma Paleoecology Database</h1>
         Dataset Archiving

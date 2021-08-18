@@ -49,10 +49,10 @@
   font-display: swap;}
 
 a { font-weight: 700;
-    color: rgba(59, 72, 202, 0.8); }
+    color: rgba(29, 35, 98, 0.8); }
 
 h1, h2, h3, h4, h5 { font-family: 'Raleway';
-		 color: rgba(72,202,59, 0.9);
+		 color: rgba(40, 113, 33, 0.9);
 		 margin-top: 0.2cm;
 	 	 margin-bottom: 0.2cm;
 	 	 direction: inherit;

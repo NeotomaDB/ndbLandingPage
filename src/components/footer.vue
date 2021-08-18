@@ -8,14 +8,14 @@
         <br>Division of Earth Sciences
       </div>
       <div class="headermouse">
-        <img src="@/assets/nsf.png" width="100" height="100">
+        <img src="@/assets/nsf.png" width="100" height="100" alt="National Science Foundation logo">
       </div>
 
       <div class="headername">
         <a href=https://earthcube.org>EarthCube</a><br>Integrative Activities<br>National Sciences Foundation
       </div>
       <div class="headermouse">
-        <img src="@/assets/logo_earthcube_cube-only_SMALL.png" style="margin-top:10px" width=100 height=100>
+        <img src="@/assets/logo_earthcube_cube-only_SMALL.png" style="margin-top:10px" width=100 height=100 alt="EarthCube logo.">
       </div>
   </div>
 </template>

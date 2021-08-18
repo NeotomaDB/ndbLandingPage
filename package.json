@@ -1,12 +1,14 @@
 {
   "name": "landingpages",
   "version": "0.1.0",
+  "sideEffects": false,
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build-report": "vue-cli-service build --report"
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",

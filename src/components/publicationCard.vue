@@ -13,7 +13,7 @@
     <div v-if="this.pubs.length > 0" class="cardbox">
       <div v-for="i in this.pubs" v-bind:key="i.publicationid" class="namecard">
         <div v-if="i.publication.doi !== null">
-          <a target="_blank" :href="'http://dx.doi.org/' + i.publication.doi" rel="noreferrer">
+          <a target="_blank" :href="'https://doi.org/' + i.publication.doi" rel="noreferrer">
             <img src="@/assets/DOI_logo.svg" class="doi" alt="DOI link to the dataset publication">
           </a></div>{{i.publication.citation}}
       </div>
@@ -45,24 +45,6 @@
           }
           self.pubs = data.data
         })
-    },
-    computed: {
-      /* I'm not sure what's going on here. . .
-      The idea is to load the publication data from the DOI server
-      not from Neotoma directly.
-
-      buildSchema: function(){
-        var pubout = {}
-
-        if (this.pubs.length > 0) {
-          var dois = self.pubs.map(x => x.doi)
-          fetch('http://dx.doi.org/' + dois[0],
-                {headers: {accept: 'text/x-bibliography'}})
-          .then((response) => { response.json() })
-          .then((data) => { pubout = data })
-        }
-        return pubout;
-      } */
     },
     mounted() {
     }

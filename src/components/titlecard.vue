@@ -68,18 +68,19 @@
       </div>
     </div>
     <div v-if="items">
-      <div v-if="items.doi.length > 0">
+      <div id="thingy" v-if="items.doi.length > 0">
         <script type="application/ld+json">
-          {{ datasetDOIs }}
+          {{ datasetschema }}
         </script>
       </div>
     </div>
+    <schemaBox :items="items"></schemaBox>
   </div>
 </template>
 
-
 <script>
 
+  import schemaBox from './schemaBox.vue'
 
   export default {
     name: 'titleCard',
@@ -91,26 +92,29 @@
     directives: {
       'b-tooltip': 'b-tooltip'
     },
+    components: {
+      'schemaBox': schemaBox
+    },
     data () {
       return {
         this: {pubs: [], dataset: []},
         items: {doi: [null,null]},
-        datasetDOIs: [],
-        buildSchema: [],
         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
         attribution: ['Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
-                      '']
+                      ''],
+        datasetschema: '',
       }
     },
     methods: {
       datasetDOI: function() {
         let self = this;
-        self.datasetDOIs = 'https://dx.doi.org/' + self.items.datasets[0].doi[0];
-        /*fetch(self.items.doi[0], {headers: {'Accept': 'application/vnd.schemaorg.ld+json'}})
-        .then(data => { return data.text() })
-        .then(function(text) { self.datasetDOIs = text})
-        .catch(err => console.log(err))*/
-      }
+        self.datasetDOIs = self.items.doi[0]
+        fetch(self.items.doi[0], {headers: {'Accept': 'application/vnd.schemaorg.ld+json'}})
+              .then(data => { 
+                return data.text() })
+              .then(function(text) { self.datasetschema = text})
+              .catch(err => console.log(err))
+            }
     },
     created() {
       let self = this
@@ -126,7 +130,7 @@
           self.items = data.data[0].site
           self.items.database = self.items.datasets[0].database
           self.items.datasettype = self.items.datasets[0].datasettype.charAt(0).toUpperCase() + self.items.datasets[0].datasettype.slice(1);
-          self.items.explorer = "http://apps.neotomadb.org/Explorer/?datasetid=" + self.items.datasets[0].datasetid;
+          self.items.explorer = "https://apps.neotomadb.org/Explorer/?datasetid=" + self.items.datasets[0].datasetid;
           self.items.currjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/downloads/" + self.items.datasets[0].datasetid;
           self.items.frozenjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/frozen/" + self.items.datasets[0].datasetid;
           self.items.loc = JSON.parse(self.items.geography);
@@ -140,7 +144,7 @@
           if (self.items.datasets[0].doi == null) {
             self.items.doi = ['', 'No DOI minted']
           } else {
-            self.items.doi = ['https://dx.doi.org/' + self.items.datasets[0].doi[0],
+            self.items.doi = ['https://doi.org/' + self.items.datasets[0].doi[0],
                               self.items.datasets[0].doi]
           }
           if (self.items.sitedescription === null) {
@@ -162,11 +166,7 @@
           }
 
           self.items.coord = self.items.coordinates.map(x => Math.round(x * 100) / 100);
-      });
-    },
-    mounted() {
-      // this.schemaData();
-      this.datasetDOI();
+      })
     }
   }
 </script>

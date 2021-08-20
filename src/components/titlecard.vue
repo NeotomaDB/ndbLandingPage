@@ -14,6 +14,15 @@
             The dynamic site map is not displayed on mobile displays.  Use the Neotoma Explorer link.<br>
             <small><strong>Coordinates</strong>: {{items.coord}}</small>
           </div>
+          <!-- remember to use dash case for Stencil-side readOnlymode prop! -->
+          <throughput-widget
+            read-only-mode="false"
+            identifier="r3d100011761"
+            additional-type="site"
+            :link.prop="this.dsid"
+            orcid-client-id="APP-BKBMDK2CLSW85I2Z"
+            token="gaWSg#B4H*wy9a-d">
+          </throughput-widget>
         </div>
 
         <div class='mapbox d-none d-sm-block'  v-b-tooltip.hover :title="attribution">

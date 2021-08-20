@@ -27,6 +27,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
+Vue.config.productionTip = false
 Vue.config.ignoredElements = ["throughput-widget"];
 
 const router = new VueRouter({

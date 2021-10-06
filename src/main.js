@@ -28,6 +28,7 @@ L.Icon.Default.mergeOptions({
 });
 
 Vue.config.productionTip = false;
+Vue.config.ignoredElements = ["throughput-widget"];
 
 const router = new VueRouter({
   mode: 'history',

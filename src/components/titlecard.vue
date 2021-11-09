@@ -175,7 +175,7 @@
           self.items.database = self.items.datasets[0].database
           self.items.datasettype = self.items.datasets[0].datasettype.charAt(0).toUpperCase() + self.items.datasets[0]
             .datasettype.slice(1);
-          self.items.explorer = "https://apps.neotomadb.org/Explorer/?datasetid=" + self.items.datasets[0].datasetid;
+          self.items.explorer = "https://apps.neotomadb.org/Explorer/?datasetids=" + self.items.datasets[0].datasetid;
           self.items.currjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/downloads/" + self.items.datasets[0]
             .datasetid;
           self.items.frozenjson = process.env.VUE_APP_API_ENDPOINT + "/v2.0/data/frozen/" + self.items.datasets[0]

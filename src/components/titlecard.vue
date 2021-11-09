@@ -11,21 +11,29 @@
         </div>
         <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
         <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
-        <div><strong>Site Annotations:</strong> <throughput-widget 
-          read-only-mode="true"
+        <b-container style="padding-bottom:10px;">
+        <b-row  class='align-middle'>
+        <b-col>
+          <div><h4>Site Annotations</h4></div><div> <throughput-widget 
+          read-only-mode="false"
           identifier="r3d100011761" 
           :link.prop="items.siteid" 
-          additional-type="dataset"
-          orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
-        </div>
-        <div class="textbox"><strong>Dataset:</strong> 
-          <throughput-widget 
-          read-only-mode="true"
-          identifier="r3d100011761" 
-          :link.prop="this.dsid" 
           additional-type="site"
           orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
+        </div>
+        </b-col>
+        <b-col>
+        <div><h4>Dataset Annotations</h4></div><div>
+          <throughput-widget 
+          read-only-mode="false"
+          identifier="r3d100011761" 
+          :link.prop="this.dsid" 
+          additional-type="dataset"
+          orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
           </div>
+          </b-col>
+        </b-row>
+        </b-container>
         <div class='d-block d-sm-none'>
           The dynamic site map is not displayed on mobile displays. Use the Neotoma Explorer link.<br>
           <small><strong>Coordinates</strong>: {{items.coord}}</small>

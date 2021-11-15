@@ -15,7 +15,7 @@
         <b-row  class='align-middle'>
         <b-col>
           <div><h4>Site Annotations</h4></div><div> <throughput-widget 
-          read-only-mode="false"
+          read-only-mode="true"
           identifier="r3d100011761" 
           :link.prop="items.siteid" 
           additional-type="site"

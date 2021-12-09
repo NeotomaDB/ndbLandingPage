@@ -12,27 +12,27 @@
         <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
         <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
         <b-container style="padding-bottom:10px;">
-        <b-row  class='align-middle'>
-        <b-col>
-          <div><h4>Site Annotations</h4></div><div> <throughput-widget 
-          read-only-mode="true"
-          identifier="r3d100011761" 
-          :link.prop="items.siteid" 
-          additional-type="site"
-          orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
-        </div>
-        </b-col>
-        <b-col>
-        <div><h4>Dataset Annotations</h4></div><div>
-          <throughput-widget 
-          read-only-mode="false"
-          identifier="r3d100011761" 
-          :link.prop="this.dsid" 
-          additional-type="dataset"
-          orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
-          </div>
-          </b-col>
-        </b-row>
+          <b-row class='align-middle'>
+            <b-col>
+              <div>
+                <h4>Site Annotations</h4>
+              </div>
+              <div>
+                <throughput-widget read-only-mode="true" identifier="r3d100011761" :link.prop="items.siteid"
+                  additional-type="site" orcid-client-id="APP-OKAEGWFY7MEOK4HE">
+                </throughput-widget>
+              </div>
+            </b-col>
+            <b-col>
+              <div>
+                <h4>Dataset Annotations</h4>
+              </div>
+              <div>
+                <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="this.dsid"
+                  additional-type="dataset" orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
+              </div>
+            </b-col>
+          </b-row>
         </b-container>
         <div class='d-block d-sm-none'>
           The dynamic site map is not displayed on mobile displays. Use the Neotoma Explorer link.<br>
@@ -41,7 +41,7 @@
 
       </div>
 
-      <div class='mapbox d-none d-sm-block' v-b-tooltip.hover :title="attribution">
+      <div v-b-tooltip.hover :title="attribution">
         <div class='map'>
           <l-map :zoom=5 :center=items.coordinates>
             <l-tile-layer :url="url"></l-tile-layer>

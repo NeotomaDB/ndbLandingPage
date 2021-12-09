@@ -1,18 +1,20 @@
 <template>
-  <div class="componentbox">
-    <div class="sitebox">
-      <div class="textbox">
-        <h1>Neotoma Dataset {{ this.dsid }}</h1>
-        <h2>{{items.sitename}}</h2>
-        <h3>{{items.datasettype}} Dataset - {{items.database}}</h3>
-        <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
-          <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have
-          limited associated metadata. Please see the associated datasets below for more complete metadata.
-        </div>
-        <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
-        <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
-        <b-container style="padding-bottom:10px;">
-          <b-row class='align-middle'>
+  <b-container>
+    <b-row>
+      <b-col>
+        <b-container>
+          <b-row>
+            <h1>Neotoma Dataset {{ this.dsid }}</h1>
+            <h2>{{items.sitename}}</h2>
+            <h3>{{items.datasettype}} Dataset - {{items.database}}</h3>
+            <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
+              <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have
+              limited associated metadata. Please see the associated datasets below for more complete metadata.
+            </div>
+            <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
+            <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
+          </b-row>
+          <b-row>
             <b-col>
               <div>
                 <h4>Site Annotations</h4>
@@ -33,13 +35,12 @@
               </div>
             </b-col>
           </b-row>
+          <div class='d-block d-sm-none'>
+            The dynamic site map is not displayed on mobile displays. Use the Neotoma Explorer link.<br>
+            <small><strong>Coordinates</strong>: {{items.coord}}</small>
+          </div>
         </b-container>
-        <div class='d-block d-sm-none'>
-          The dynamic site map is not displayed on mobile displays. Use the Neotoma Explorer link.<br>
-          <small><strong>Coordinates</strong>: {{items.coord}}</small>
-        </div>
-
-      </div>
+      </b-col>
 
       <div v-b-tooltip.hover :title="attribution">
         <div class='map'>
@@ -50,7 +51,7 @@
         </div>
         <small><strong>Coordinates</strong>: {{items.coord}}</small>
       </div>
-    </div>
+    </b-row>
     <div v-if='items'>
       <div id="container">
         <div v-if="items.doi[1]==='No DOI minted'">
@@ -104,7 +105,7 @@
       </div>
     </div>
     <schemaBox :items="items"></schemaBox>
-  </div>
+  </b-container>
 </template>
 
 <script>

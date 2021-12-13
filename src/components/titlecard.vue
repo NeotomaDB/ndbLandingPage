@@ -1,12 +1,13 @@
 <template>
   <b-container>
-    <b-row>
-      <b-col>
+    <b-row cols="12" md="7">
+      <b-col cols="9">
         <b-container>
-          <b-row>
+          <b-row cols="1">
             <h1>Neotoma Dataset {{ this.dsid }}</h1>
             <h2>{{items.sitename}}</h2>
             <h3>{{items.datasettype}} Dataset - {{items.database}}</h3>
+            <b-button>hello</b-button>
             <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
               <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have
               limited associated metadata. Please see the associated datasets below for more complete metadata.
@@ -14,25 +15,18 @@
             <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
             <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
           </b-row>
-          <b-row>
-            <b-col>
-              <div>
-                <h4>Site Annotations</h4>
-              </div>
-              <div>
-                <throughput-widget read-only-mode="true" identifier="r3d100011761" :link.prop="items.siteid"
-                  additional-type="site" orcid-client-id="APP-OKAEGWFY7MEOK4HE">
-                </throughput-widget>
-              </div>
+          <b-row cols="8" align-h="start" align-v="center" class="text-center">
+            <b-col cols="4">
+              <h4 class="text-center">Site Annotations</h4>
+              <throughput-widget read-only-mode="true" identifier="r3d100011761" :link.prop="items.siteid"
+                additional-type="site" orcid-client-id="APP-OKAEGWFY7MEOK4HE">
+              </throughput-widget>
             </b-col>
-            <b-col>
-              <div>
-                <h4>Dataset Annotations</h4>
-              </div>
-              <div>
-                <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="this.dsid"
-                  additional-type="dataset" orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
-              </div>
+            <b-col cols="4">
+              <h4 class="text-center">Dataset Annotations</h4>
+              <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="this.dsid"
+                additional-type="dataset" orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
+
             </b-col>
           </b-row>
           <div class='d-block d-sm-none'>
@@ -41,32 +35,31 @@
           </div>
         </b-container>
       </b-col>
-
-      <div v-b-tooltip.hover :title="attribution">
-        <div class='map'>
-          <l-map :zoom=5 :center=items.coordinates>
-            <l-tile-layer :url="url"></l-tile-layer>
-            <l-marker :lat-lng=items.coordinates></l-marker>
-          </l-map>
+      <b-col cols="3">
+        <div v-b-tooltip.hover :title="attribution">
+          <div class='map'>
+            <l-map :zoom=5 :center=items.coordinates>
+              <l-tile-layer :url="url"></l-tile-layer>
+              <l-marker :lat-lng=items.coordinates></l-marker>
+            </l-map>
+          </div>
+          <small><strong>Coordinates</strong>: {{items.coord}}</small>
         </div>
-        <small><strong>Coordinates</strong>: {{items.coord}}</small>
-      </div>
+      </b-col>
     </b-row>
-    <div v-if='items'>
-      <div id="container">
-        <div v-if="items.doi[1]==='No DOI minted'">
-          <div class="buttondiv">DOI: {{ items.doi[1] }}</div>
-        </div>
-        <div v-else>
-          <a target="_blank" :href="items.doi[0]" rel="noreferrer">
-            <div class="buttondiv">DOI: {{ items.doi[1][0] }}</div>
-          </a>
-        </div>
+    <b-row cols="12" v-if='items'>
+      <b-col>
+          <b-button  v-if="items.doi[1]==='No DOI minted'">DOI: {{ items.doi[1] }}</b-button>
+          <b-button v-else variant="primary" activetarget="_blank" :href="items.doi[0]" rel="noreferrer">DOI: {{ items.doi[1][0] }}</b-button>
+      </b-col>
+      <b-col>
         <a target="_blank" :href=items.explorer rel="noreferrer">
           <div class="buttondiv">
             Neotoma Explorer Link
           </div>
         </a>
+      </b-col>
+      <b-col>
         <div v-if="items.datasettype == 'Geochronologic'">
           <div class="buttondiv">
             Current Data Disabled
@@ -79,6 +72,8 @@
             </div>
           </a>
         </div>
+      </b-col>
+      <b-col>
         <div v-if="items.datasettype == 'Geochronologic'">
           <div class="buttondiv">
             Data As Uploaded Disabled
@@ -91,8 +86,9 @@
             </div>
           </a>
         </div>
-      </div>
-    </div>
+      </b-col>
+    
+    </b-row>
     <div v-if="items">
       <div id="thingy" v-if="items.doi.length > 0">
         <script type="application/ld+json">

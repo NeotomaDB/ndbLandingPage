@@ -47,13 +47,13 @@ export default {
           fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/sites/' + siteid + '/datasets')
             .then((response) => { return response.json() })
             .then((data) => {
-              var dsdt = data.data
+              var dsdt = data.data[0].site.datasets
 
               self.dataset = dsdt.map( function(y)
                   {
-                    return {datasetid: y.site.datasets[0].datasetid,
-                            datasettype: y.site.datasets[0].datasettype,
-                            database: y.site.datasets[0].database}
+                    return {datasetid: y.datasetid,
+                            datasettype: y.datasettype,
+                            database: y.database}
                   })
               .flat()
               .filter(x => x.datasetid !== parseInt(this.dsid))

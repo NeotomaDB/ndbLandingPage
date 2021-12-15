@@ -37,26 +37,31 @@
       hitstuff: function() {
         let self = this
 
-        fetch(process.env.VUE_APP_APIDEV_ENDPOINT + '/v2.0/data/datasets/12')
+        fetch(process.env.VUE_APP_APIDEV_ENDPOINT + '/v2.0/data/datasets/12', {
+          method:'HEAD', mode:'no-cors'
+        })
           .then( (response) => {
             self.ping["api-dev"] = response.status === 200;
           })
           .catch(err => console.log(err));
 
-        fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/datasets/12')
+        fetch(process.env.VUE_APP_API_ENDPOINT + '/v2.0/data/datasets/12', {
+          method:'HEAD'
+        })
           .then( (response) => {
             self.ping["api"] = response.status === 200;
           })
           .catch(err => console.log(err));
 
         fetch("https://apps.neotomadb.org/explorer",
-              { mode: "no-cors" })
+              { mode: "no-cors", method:'HEAD' })
           .then( (response) => {
             self.ping["explorer"] = response.status === 0;
           })
           .catch(err => console.log(err));
 
-        fetch(process.env.VUE_APP_TILIA_ENDPOINT + '/api')
+        fetch(process.env.VUE_APP_TILIA_ENDPOINT + '/api',
+             {method:"HEAD"})
           .then( (response) => {
             self.ping["tilia-dev"] = response.status === 200;
           })

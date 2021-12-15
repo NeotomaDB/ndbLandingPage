@@ -25,6 +25,7 @@
     "vue-gtag": "^1.16.1",
     "vue-router": "^3.5.2",
     "vue2-leaflet": "^1.2.3",
+    "webpack": "^4.46.0",
     "webpack-dev-server": "^4.0.0"
   },
   "devDependencies": {

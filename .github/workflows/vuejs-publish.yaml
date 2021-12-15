@@ -1,4 +1,4 @@
-name: Gatsby Publish
+name: vueJs LandingPage Publish
 
 on:
   push:
@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
+      - name: Install vue & webpack.
+        run: npm install vue webpack
       - name: Do a clean install of the required packages.
         run: npm install
       - name: Install the gh-pages CLI

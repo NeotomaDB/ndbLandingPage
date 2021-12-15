@@ -7,7 +7,7 @@
             <h1>Neotoma Dataset {{ this.dsid }}</h1>
             <h2>{{items.sitename}}</h2>
             <h3>{{items.datasettype}} Dataset - {{items.database}}</h3>
-            <b-button>hello</b-button>
+            
             <div v-if="items.datasettype == 'Geochronologic'" class="geochronwarn">
               <strong>Note</strong>: Geochronologic datasets are unique in Neotoma, they are not assigned DOIs and have
               limited associated metadata. Please see the associated datasets below for more complete metadata.
@@ -47,45 +47,35 @@
         </div>
       </b-col>
     </b-row>
-    <b-row cols="12" v-if='items'>
+    <b-row cols="12" v-if='items' style="padding-top:10px;padding-bottom:10px;">
       <b-col>
-          <b-button  v-if="items.doi[1]==='No DOI minted'">DOI: {{ items.doi[1] }}</b-button>
-          <b-button v-else variant="primary" activetarget="_blank" :href="items.doi[0]" rel="noreferrer">DOI: {{ items.doi[1][0] }}</b-button>
+          <b-button v-if="items.doi[1]==='No DOI minted'" variant="outline-danger">
+            No DOI Minted
+          </b-button>
+          <b-button v-else variant="outline-info" activetarget="_blank" :href="items.doi[0]" rel="noreferrer">
+            DOI: {{ items.doi[1][0] }}
+          </b-button>
       </b-col>
       <b-col>
-        <a target="_blank" :href=items.explorer rel="noreferrer">
-          <div class="buttondiv">
+        <b-button variant="outline-info" activetarget="_blank" :href=items.explorer rel="noreferrer">
             Neotoma Explorer Link
-          </div>
-        </a>
+        </b-button>
       </b-col>
       <b-col>
-        <div v-if="items.datasettype == 'Geochronologic'">
-          <div class="buttondiv">
+        <b-button v-if="items.datasettype == 'Geochronologic'" variant="outline-danger">
             Current Data Disabled
-          </div>
-        </div>
-        <div v-else>
-          <a target="_blank" :href=items.currjson rel="noreferrer">
-            <div class="buttondiv">
+        </b-button>
+        <b-button v-else target="_blank"  variant="outline-info" :href=items.currjson rel="noreferrer">
               Download Current Data (JSON)
-            </div>
-          </a>
-        </div>
+        </b-button>
       </b-col>
       <b-col>
-        <div v-if="items.datasettype == 'Geochronologic'">
-          <div class="buttondiv">
-            Data As Uploaded Disabled
-          </div>
-        </div>
-        <div v-else>
-          <a target="_blank" :href=items.frozenjson rel="noreferrer">
-            <div class="buttondiv">
+        <b-button v-if="items.datasettype == 'Geochronologic'" variant="outline-danger">
+          Data As Uploaded Disabled
+        </b-button>
+        <b-button v-else target="_blank"  variant="outline-info" :href=items.frozenjson rel="noreferrer">
               Download Data As Uploaded (JSON)
-            </div>
-          </a>
-        </div>
+        </b-button>
       </b-col>
     
     </b-row>
@@ -115,7 +105,8 @@
       },
     },
     directives: {
-      'b-tooltip': 'b-tooltip'
+      'b-tooltip': 'b-tooltip',
+      'b-button': 'b-button'
     },
     components: {
       'schemaBox': schemaBox

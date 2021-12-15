@@ -6,8 +6,9 @@ import VueGtag from 'vue-gtag';
 import App from './App.vue'
 import 'leaflet/dist/leaflet.css';
 
-import { BContainer, BCol, BRow, BCard, BTooltip } from 'bootstrap-vue';
+import { BButton, BContainer, BCol, BRow, BCard, BTooltip } from 'bootstrap-vue';
 Vue.component('b-container', BContainer);
+Vue.component('b-button', BButton);
 Vue.component('b-tooltip', BTooltip);
 Vue.component('b-col', BCol);
 Vue.component('b-row', BRow);

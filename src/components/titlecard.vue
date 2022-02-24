@@ -18,7 +18,7 @@
           <b-row cols="8" align-h="start" align-v="center" class="text-center">
             <b-col cols="4">
               <h4 class="text-center">Site Annotations</h4>
-              <throughput-widget read-only-mode="true" identifier="r3d100011761" :link.prop="items.siteid"
+              <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="items.siteid"
                 additional-type="site" orcid-client-id="APP-OKAEGWFY7MEOK4HE">
               </throughput-widget>
             </b-col>
@@ -26,7 +26,6 @@
               <h4 class="text-center">Dataset Annotations</h4>
               <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="this.dsid"
                 additional-type="dataset" orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
-
             </b-col>
           </b-row>
           <div class='d-block d-sm-none'>

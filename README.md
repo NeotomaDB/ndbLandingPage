@@ -1,3 +1,9 @@
+[![NSF-1948926](https://img.shields.io/badge/NSF-1948926-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1948926)
+[![NSF-1550855](https://img.shields.io/badge/NSF-1550855-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1550855)
+[![NSF-1541002](https://img.shields.io/badge/NSF-1541002-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1541002)
+[![NSF-1550707](https://img.shields.io/badge/NSF-1550707-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1550707)
+1541002
+
 # Neotoma Paleoecology Database Landing Pages
 
 This project is used to develop a Javascript `Vue.js` application to serve [Neotoma Paleoecology Database](http://neotomadb.org/) datasets as landing pages.
@@ -6,9 +12,11 @@ The page leverages the [Neotoma v2 API](http://github.com/NeotomaDB/api_nodetest
 
 ## Contributors
 
-*   [Simon Goring](http://goring.org)
-*   Michael Stryker
-*   [The Neotoma Paleoecology Database](http://neotomadb.org)
+This project is an open project, and contributions are welcome from any individual.  All contributors to this project are bound by a [code of conduct](CODE_OF_CONDUCT.md).  Please review and follow this code of conduct as part of your contribution.
+
+* [![orcid](https://img.shields.io/badge/orcid-0000--0002--2700--4605-brightgreen.svg)](https://orcid.org/0000-0002-2700-4605) [Simon Goring](http://goring.org)
+* Michael Stryker
+* [The Neotoma Paleoecology Database](http://neotomadb.org)
 
 ## Deploying the App
 
@@ -28,9 +36,9 @@ To initialize the package locally using the GitHub repository the user is expect
 
 The developers of this repository will make an effort to manage packages effectively, however the user may wish to update packages, or check to ensure [node package security](https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities) is appropriately managed.
 
-*   To update package: `npm update`
-*   To audit for package security: `npm audit`(`npm audit fix` will audit and automatically update packages with security vulnerabilities)
-*   To manage updates without version policing (which may lead to audit issues) the user may consider the use of the package [`npm-check-updates`](https://www.npmjs.com/package/npm-check-updates).
+* To update package: `npm update`
+* To audit for package security: `npm audit`(`npm audit fix` will audit and automatically update packages with security vulnerabilities)
+* To manage updates without version policing (which may lead to audit issues) the user may consider the use of the package [`npm-check-updates`](https://www.npmjs.com/package/npm-check-updates).
 
 ### Development
 

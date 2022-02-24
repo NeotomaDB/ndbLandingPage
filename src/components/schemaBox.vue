@@ -1,8 +1,8 @@
 <template>
-  <div id="scienceSchema">
-    <script type="application/ld+json">
-      {{ schemaData }}
-    </script>
+  <div class='yoohoo'>
+  <script type="application/ld+json">
+    {{ schemaData }}
+  </script>
   </div>
 </template>
 

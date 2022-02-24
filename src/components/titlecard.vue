@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row cols="12" md="7">
+    <b-row cols="12" md="7" align-v = 'center'>
       <b-col cols="9">
         <b-container>
           <b-row cols="1">
@@ -15,18 +15,26 @@
             <p><strong>Site Description: </strong><em>{{items.sitedescription}}</em></p>
             <p><strong>Site Notes: </strong><em>{{items.sitenotes}}</em></p>
           </b-row>
-          <b-row cols="8" align-h="start" align-v="center" class="text-center">
-            <b-col cols="4">
-              <h4 class="text-center">Site Annotations</h4>
-              <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="items.siteid"
-                additional-type="site" orcid-client-id="APP-OKAEGWFY7MEOK4HE">
-              </throughput-widget>
+          <b-row align-h="center" align-v="center"  class='d-none d-md-block'>
+            <b-row md="auto">
+            <b-col cols="6" lg="auto">
+              <h4 class="text-center"><small>Site Annotations</small></h4>
             </b-col>
-            <b-col cols="4">
-              <h4 class="text-center">Dataset Annotations</h4>
-              <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="this.dsid"
-                additional-type="dataset" orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
+            <b-col cols="6" lg="auto">
+              <h4 class="text-center"><small>Dataset Annotations</small></h4>
             </b-col>
+            </b-row>
+            <b-row>
+              <b-col cols="6" lg="auto">
+                <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="items.siteid"
+                  additional-type="site" orcid-client-id="APP-OKAEGWFY7MEOK4HE">
+                </throughput-widget>
+              </b-col>
+              <b-col cols="6" lg="auto">
+                <throughput-widget read-only-mode="false" identifier="r3d100011761" :link.prop="this.dsid"
+                  additional-type="dataset" orcid-client-id="APP-OKAEGWFY7MEOK4HE"></throughput-widget>
+              </b-col>
+            </b-row>
           </b-row>
           <div class='d-block d-sm-none'>
             The dynamic site map is not displayed on mobile displays. Use the Neotoma Explorer link.<br>
@@ -34,7 +42,7 @@
           </div>
         </b-container>
       </b-col>
-      <b-col cols="3">
+      <b-col cols="3" class='d-none d-md-block'>
         <div v-b-tooltip.hover :title="attribution">
           <div class='map'>
             <l-map :zoom=5 :center=items.coordinates>
@@ -51,12 +59,12 @@
           <b-button v-if="items.doi[1]==='No DOI minted'" variant="outline-danger">
             No DOI Minted
           </b-button>
-          <b-button v-else variant="outline-info" activetarget="_blank" :href="items.doi[0]" rel="noreferrer">
+          <b-button v-else variant="outline-dark" activetarget="_blank" :href="items.doi[0]" rel="noreferrer">
             DOI: {{ items.doi[1][0] }}
           </b-button>
       </b-col>
       <b-col>
-        <b-button variant="outline-info" activetarget="_blank" :href=items.explorer rel="noreferrer">
+        <b-button variant="outline-dark" activetarget="_blank" :href=items.explorer rel="noreferrer">
             Neotoma Explorer Link
         </b-button>
       </b-col>
@@ -64,7 +72,7 @@
         <b-button v-if="items.datasettype == 'Geochronologic'" variant="outline-danger">
             Current Data Disabled
         </b-button>
-        <b-button v-else target="_blank"  variant="outline-info" :href=items.currjson rel="noreferrer">
+        <b-button v-else target="_blank"  variant="outline-dark" :href=items.currjson rel="noreferrer">
               Download Current Data (JSON)
         </b-button>
       </b-col>
@@ -72,7 +80,7 @@
         <b-button v-if="items.datasettype == 'Geochronologic'" variant="outline-danger">
           Data As Uploaded Disabled
         </b-button>
-        <b-button v-else target="_blank"  variant="outline-info" :href=items.frozenjson rel="noreferrer">
+        <b-button v-else target="_blank"  variant="outline-dark" :href=items.frozenjson rel="noreferrer">
               Download Data As Uploaded (JSON)
         </b-button>
       </b-col>

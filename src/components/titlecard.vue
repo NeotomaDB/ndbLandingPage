@@ -88,16 +88,10 @@
     </b-row>
     <div v-if="items">
       <div id="thingy" v-if="items.doi.length > 0">
-        <script type="application/ld+json">
-          {
-            {
-              datasetschema
-            }
-          }
-        </script>
+        <schemaBox :items="items"></schemaBox>
       </div>
     </div>
-    <schemaBox :items="items"></schemaBox>
+    
   </b-container>
 </template>
 

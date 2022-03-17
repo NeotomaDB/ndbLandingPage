@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row cols="12" md="7" align-v = 'center'>
+    <b-row cols="12" align-v = 'center'>
       <b-col cols="9">
         <b-container>
           <b-row cols="1">
@@ -54,7 +54,7 @@
         </div>
       </b-col>
     </b-row>
-    <b-row cols="12" v-if='items' style="padding-top:10px;padding-bottom:10px;">
+    <b-row cols="12" v-if='items' style="padding-top:10px;padding-bottom:10px;" align-v="center">
       <b-col>
           <b-button v-if="items.doi[1]==='No DOI minted'" variant="outline-danger">
             No DOI Minted
@@ -91,7 +91,6 @@
         <schemaBox :items="items"></schemaBox>
       </div>
     </div>
-    
   </b-container>
 </template>
 

@@ -5,7 +5,6 @@ import VueGtag from 'vue-gtag';
 
 import App from './App.vue'
 import 'leaflet/dist/leaflet.css';
-import VueJsonLD from 'vue-jsonld'
 
 import { BButton, BContainer, BCol, BRow, BCard, BTooltip } from 'bootstrap-vue';
 
@@ -55,7 +54,6 @@ const router = new VueRouter({
   ]
 });
 
-Vue.use(VueJsonLD)
 Vue.use(VueRouter);
 Vue.use(VueGtag, {
   config: { id: 'G-3XDNWKENJ4' }

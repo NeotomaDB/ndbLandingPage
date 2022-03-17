@@ -1,8 +1,9 @@
 <template>
-  <script v-html="buildSchema" type="application/ld+json"></script>
+<div />
 </template>
 
 <script>
+
   export default {
     name: 'schemaCard',
     props: {
@@ -13,11 +14,19 @@
     data() {
       return {
         msg: 'Contact data rendered.',
-        buildSchema: null
+        buildSchema: {aa: 12},
       }
     },
-    jsonld() {
-      return {
+    mounted() {
+        let Script = document.createElement("script");
+        Script.setAttribute("type", "application/ld+json");
+        Script.textContent = JSON.stringify(this.schemaData);
+        document.head.appendChild(Script);
+    },
+    computed: {
+      schemaData: function () {
+
+        var output = {
           "@context": "https://schema.org",
           "@type": "Dataset",
           "license": "https://creativecommons.org/licenses/by/4.0/deed.en_US",
@@ -63,6 +72,23 @@
             }
           }
         }
+
+        if (!this.items.datasets[0].doi == null) {
+          output["@context"] = {
+            "@vocab": "https://schema.org/",
+            "datacite": "https://purl.org/spar/datacite/",
+          }
+
+          output.identifier = {
+            "@type": "PropertyValue",
+            "propertyID": "https://purl.org/spar/datacite/doi",
+            "url": this.items.datasets[0].doi[0],
+            "value": this.items.datasets[0].doi[1]
+          }
+        }
+
+        return output;
+      }
     }
   }
 </script>

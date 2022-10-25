@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server.js",
-    "build-report": "vue-cli-service build --report"
+    "build-report": "vue-cli-service build --report",
+    "start": "node server.js"
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",
@@ -16,6 +16,7 @@
     "cache-loader": "^4.1.0",
     "compression": "^1.7.4",
     "compression-webpack-plugin": "^7.1.2",
+    "core-js": "^3.8.3",
     "dotenv": "^8.6.0",
     "eslint": "^8.17.0",
     "eslint-plugin-vue": "^8.7.1",
@@ -23,19 +24,20 @@
     "leaflet": "^1.8.0",
     "portal-vue": "^2.1.7",
     "throughput-widget": "^1.0.0",
-    "vue": "^2.6.14",
     "vue-gtag": "^1.16.1",
     "vue-jsonld": "^1.0.1",
     "vue-router": "^3.5.4",
     "vue2-leaflet": "^1.2.3",
     "webpack": "^4.46.0",
-    "webpack-dev-server": "^4.9.2"
+    "webpack-dev-server": "^4.9.2",
+    "vue": "^3.1.0-0",
+    "@vue/compat": "^3.1.0-0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-service": "^4.5.17",
-    "vue-template-compiler": "^2.6.14",
-    "webpack": "^4.46.0"
+    "@vue/cli-plugin-babel": "^5.0.4",
+    "@vue/cli-service": "^5.0.4",
+    "@vue/compiler-sfc": "^3.1.0-0",
+    "webpack": "^4.24.0"
   },
   "eslintConfig": {
     "root": true,

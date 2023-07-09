@@ -1,18 +1,21 @@
 // vue.config.js
 
 module.exports = {
-  devServer: {
-      disableHostCheck: true
-  },
-  configureWebpack:{
-    performance: {
-      hints: false
-    },
-    optimization: {
-      splitChunks: {
-        minSize: 10000,
-        maxSize: 250000,
-      }
-    }
+  chainWebpack: (config) => {
+    config.resolve.alias.set('vue', '@vue/compat')
+
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap((options) => {
+        return {
+          ...options,
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2
+            }
+          }
+        }
+      })
   }
 }

@@ -1,8 +1,16 @@
+<!-- badges: start -->
+
+[![lifecycle](https://img.shields.io/badge/lifecycle-superseded-orange.svg)](https://github.com/NeotomaDB/landingpagev3)
+
+
 [![NSF-1948926](https://img.shields.io/badge/NSF-1948926-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1948926)
 [![NSF-1550855](https://img.shields.io/badge/NSF-1550855-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1550855)
 [![NSF-1541002](https://img.shields.io/badge/NSF-1541002-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1541002)
 [![NSF-1550707](https://img.shields.io/badge/NSF-1550707-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1550707)
 1541002
+
+<!-- badges: end -->
+
 
 # Neotoma Paleoecology Database Landing Pages
 
